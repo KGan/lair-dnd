@@ -11,12 +11,6 @@ tagline     | string    | (optional)
 maxguests   | integer   | not null
 price       | integer    | not null (may need extra table if multiple currencies)
 currency_id | integer    | not null, fk references currencies
-
-## space
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | pk, not null
-residence_id| integer   | fk not null (ref: residences)
 description | string    | not null
 rules       | string    | not null
 

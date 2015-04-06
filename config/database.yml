@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: sample-project-proposal_production
-  username: sample-project-proposal
+  database: lairdnd_production
+  username: lairdnd
   password: <%= ENV['SAMPLE-PROJECT-PROPOSAL_DATABASE_PASSWORD'] %>
