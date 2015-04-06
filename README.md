@@ -5,7 +5,7 @@
 
 [Heroku link][heroku]
 
-[heroku]:herokuapp.com
+[heroku]:http://lairdnd.com
 
 ## Minimum Viable Product
 LairDnD is a ABNB clone that sets prospective videogame and movie villains up with
