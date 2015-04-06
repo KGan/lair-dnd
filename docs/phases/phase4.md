@@ -1,20 +1,30 @@
-# Phase 4: User Feeds
+# Phase 4: Bookings
 
 ## Rails
 ### Models
+* reservations
+* messages
 
 ### Controllers
-Api::PostsController (feed)
+Api::ReservationsController (feed)
 
 ### Views
-posts/feed.json.jbuilder
+* reservation.json.jbuilder
+* messages
 
 ## Backbone
 ### Models
+* reservation
+* message
 
 ### Collections
+* reservations
+* messages
 
 ### Views
-* FeedShow (composite view, contains PostsIndex subview)
+* reservationShow (composite view, contains reservation/availability subview)
+* reservationForm
+* persistent Message Form / post comment private etc.
 
 ## Gems/Libraries
+* calendar javascript library

@@ -1,29 +1,35 @@
-# Phase 2: Viewing Blogs and Posts
+# Phase 2: Locations and Availability
 
 ## Rails
 ### Models
+* Location
+* LocationAlias
+* LocationMapping
+* Availability
 
 ### Controllers
-Api::BlogsController (create, destroy, index, show)
-Api::PostsController (create, destroy, show, update)
+Api::LocationsController (create, destroy, index, show)
+Api::LocationsAliasController (create, destroy, show, update)
+Api::AvailabilityController (create, destroy, show)
 
 ### Views
-* blogs/show.json.jbuilder
+* location/show.json.jbuilder
+* location/index.json.jbuilder + partials
 
 ## Backbone
 ### Models
-* Blog (parses nested `posts` association)
-* Post
+* location
 
 ### Collections
-* Blogs
-* Posts
+* locations
 
 ### Views
-* BlogForm
-* BlogShow (composite view, contains PostsIndex subview)
-* PostsIndex (composite view, contains PostsIndexItem subviews)
-* PostsIndexItem
-* PostShow
+* locForm
+* locAliasShow (composite view, contains PostsIndex subview)
+* availableIndex (composite view, contains PostsIndexItem subviews)
+* availabilityform
 
 ## Gems/Libraries
+* google maps api
+* custom maps projections
+* interactjs

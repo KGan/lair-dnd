@@ -1,4 +1,4 @@
-# Phase 3: Editing and Displaying Posts
+# Phase 3: Searching and Browsing Listings
 
 ## Rails
 ### Models
@@ -6,6 +6,8 @@
 ### Controllers
 
 ### Views
+* all locations jbuilder.json
+* listings json jbuilder
 
 ## Backbone
 ### Models
@@ -13,9 +15,10 @@
 ### Collections
 
 ### Views
-* PostForm
+* SearchForm
+* SearchResultsShow
+* show basics of photos/maps for snippet results
 
 ## Gems/Libraries
-* Filepicker
-* Markdown-js
-* Bootstrap Markdown
+* typeahead.js
+* mapbox.js
