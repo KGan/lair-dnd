@@ -26,7 +26,7 @@ class Session < ActiveRecord::Base
   end
 
   def self.session_exists?(rip)
-    !!(self.find_by_remote_ip(rip).first)
+    !!(self.find_by_remote_ip(rip))
   end
 
   def self.generate_token
@@ -34,5 +34,8 @@ class Session < ActiveRecord::Base
       token = SecureRandom.urlsafe_base64
     end while Session.find_by_session_token(token)
     token
+  end
+
+  def process(req)
   end
 end

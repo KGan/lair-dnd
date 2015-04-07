@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     current_user.destroy_session(session[:session_token])
     session[:session_token] = nil
   end
+
   def signin(user)
     @current_user = user
     session[:session_token] = @current_user.create_or_update_session(request)

@@ -14,15 +14,15 @@
 class User < ActiveRecord::Base
   has_many :identities
   has_many :sessions
-  validates_presence_of :username, :email, :password_digest
-  validates_uniqueness_of :email, :username
+  validates_presence_of :email, :password_digest
+  validates_uniqueness_of :email
+  validates_uniqueness_of :username, :allow_nil => true, :allow_blank => true
   validates :password, length: {minimum: 7, allow_nil: true}
   attr_reader :password
-  before_save :session_check
 
   def self.find_by_credentials(info)
-    u = self.find_by_username(info.username)
-    (u && u.verifyPassword(info.password) ) ? u : nil
+    u = self.find_by_email(info['email'])
+    (u && u.verifyPassword(info['password']) ) ? u : nil
   end
 
   def self.find_by_session(token)
@@ -40,8 +40,8 @@ class User < ActiveRecord::Base
   end
 
   def create_or_update_session(req = nil)
-    if self.sessions.session_exists?(request.remote_ip)
-      self.sessions.where(remote_ip: request.remote_ip).reset_token!
+    if self.sessions.session_exists?(req.remote_ip)
+      self.sessions.where(remote_ip: req.remote_ip).reset_token!
     else
       create_session(req)
     end
