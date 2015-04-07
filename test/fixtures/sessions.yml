@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  session_token :string
+#  ua_info       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  session_token: MyString
+  ua_info: MyString
+
+two:
+  user_id: 
+  session_token: MyString
+  ua_info: MyString
