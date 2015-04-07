@@ -4,7 +4,7 @@ class CreateSessions < ActiveRecord::Migration
       t.references :user, index: true
       t.string :session_token
       t.string :ua_info
-      t.string :access_ip
+      t.string :remote_ip
 
       t.timestamps null: false
     end

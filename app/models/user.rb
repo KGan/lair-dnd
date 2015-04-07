@@ -18,10 +18,15 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :username
   validates :password, length: {minimum: 7, allow_nil: true}
   attr_reader :password
+  before_save :session_check
 
   def self.find_by_credentials(info)
     u = self.find_by_username(info.username)
     (u && u.verifyPassword(info.password) ) ? u : nil
+  end
+
+  def self.find_by_session(token)
+    Session.find_by_session_token(token).try(:user)
   end
 
   def password=(password)
@@ -33,4 +38,43 @@ class User < ActiveRecord::Base
   def verifyPassword(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
+
+  def create_or_update_session(req = nil)
+    if self.sessions.session_exists?(request.remote_ip)
+      self.sessions.where(remote_ip: request.remote_ip).reset_token!
+    else
+      create_session(req)
+    end
+  end
+
+  def destroy_session(token)
+    sess = self.sessions.find_by_session_token(token)
+    if sess
+      sess.destroy
+      true
+    else
+      false
+    end
+  end
+
+  def create_session(req = nil)
+    if self.sessions.length > 4
+      self.sessions.order(:created_at).first.destroy
+    end
+    token = Session.generate_token
+    session = self.sessions.create(session_token: token)
+    session.process(req) if req
+    token
+  end
+
+  def find_session(id)
+    self.sessions.find(id)
+  end
+
+  def ensure_session
+    if self.sessions.length < 1
+     create_session
+    end
+  end
+
 end
