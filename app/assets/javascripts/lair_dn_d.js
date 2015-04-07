@@ -4,7 +4,8 @@ window.LairDnD = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    new LairDnD.Routers.Router({$rootEl: $('#bb-content')});
+    Backbone.history.start();
   }
 };
 
