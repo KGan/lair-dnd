@@ -6,6 +6,7 @@
 #  user_id       :integer
 #  session_token :string
 #  ua_info       :string
+#  remote_ip     :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

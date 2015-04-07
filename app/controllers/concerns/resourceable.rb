@@ -6,7 +6,7 @@ module Resourceable
   end
 
   def load_resource
-    self.instance_variable_set("@{self.controller_name.singularize}", self.controller_name.classify.constantize.find(params[:id]))
+    self.instance_variable_set("@#{self.controller_name.singularize}", self.controller_name.classify.constantize.find(params[:id]))
   end
 
 end

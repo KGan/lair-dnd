@@ -14,6 +14,7 @@
 class User < ActiveRecord::Base
   has_many :identities
   has_many :sessions
+  has_many :listings, primary_key: :id, foreign_key: :owner_id
   validates_presence_of :email, :password_digest
   validates_uniqueness_of :email
   validates_uniqueness_of :username, :allow_nil => true, :allow_blank => true
