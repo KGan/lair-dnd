@@ -12,5 +12,3 @@ LairDnD.Models.Listing = Backbone.Model.extend({
     return response;
   }
 });
-
-LairDnD.FormHelpers.formAttrs.call(LairDnD.Models.Listing, 'listing');

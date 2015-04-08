@@ -1,7 +1,8 @@
 LairDnD.Views.Navbar = Backbone.View.extend({
   error_template: JST['shared/errors'],
   events: {
-    "submit form": 'loginsignup'
+    "submit form": 'loginsignup',
+    'click .new-space': 'newListing'
   },
   initialize: function(options) {
     this.$el = options.$navbar;
@@ -28,5 +29,8 @@ LairDnD.Views.Navbar = Backbone.View.extend({
         $form.siblings('.flashes').html(content);
       }.bind(this)
     })
+  },
+  newListing: function(event){
+    Backbone.history.navigate('listing/new', {trigger: true});
   }
 })

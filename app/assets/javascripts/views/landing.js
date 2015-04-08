@@ -1,4 +1,10 @@
 LairDnD.Views.Landing = Backbone.CompositeView.extend({
   template: JST['landing'],
-  className: 'banner'
+  render: function() {
+    var content = this.template({
+      
+    });
+    this.$el.html(content);
+    return this;
+  }
 });

@@ -1,7 +1,7 @@
 class Api::ListingsController < Api::ApiController
   skip_before_filter :require_login!, only:[:index, :show]
   def index
-    @listings = Listing.all if (@listings = search)
+    @listings = Listing.all.first(20) if (@listings = search)
     render :index
   end
 

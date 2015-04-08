@@ -1,23 +1,18 @@
 LairDnD.Views.NewForm = Backbone.View.extend({
-  template: JST['shared/new'],
-  form_template: JST['shared/new_form'],
+  template: JST['shared/new_form'],
   events: {
-    'click': 'renderForm',
     'submit form': 'submit',
-    'blur': 'closeForm'
   },
   render: function() {
-    var content = this.template();
+    if (!this.model.constructor._formAttrs_) {
+      var cb = this.render.bind(this);
+      LairDnD.FormHelpers.formAttrs.call(LairDnD.Models.Listing, 'listing', cb);
+      return this;
+    }
 
-    this.$el.html(content);
-    return this;
-  },
-  renderForm: function(event) {
-    if (this._formRendered || !this.model._formAttrs_) return;
-    this._formRendered = true;
-    var content = this.form_template({
+    var content = this.template({
       model: this.model,
-      attributes: _(this.model._formAttrs_),
+      attributes: _(this.model.constructor._formAttrs_),
       naming: this.className
     });
 
@@ -35,11 +30,8 @@ LairDnD.Views.NewForm = Backbone.View.extend({
     }
     this.model.save(formData, {
       success: function(model) {
-        Backbone.history.navigate(Backbone.history.fragment, {trigger: true});
+        Backbone.history.navigate('', {trigger: true});
       }
     });
-  },
-  closeForm: function(event) {
-    this.render();
   }
 });

@@ -1,6 +1,7 @@
 LairDnD.Routers.Router = Backbone.Router.extend({
   routes: {
-    '': 'landing'
+    '': 'landing',
+    'listing/new': 'newListing'
   },
   initialize: function(options) {
     this.contents = options;
@@ -9,13 +10,26 @@ LairDnD.Routers.Router = Backbone.Router.extend({
   },
 
   landing: function() {
+    var landingView = new LairDnD.Views.Landing();
+    this._swapView('$rootEl', landingView);
+  },
 
+  newListing: function() {
+    var nlView = new LairDnD.Views.NewForm({
+      model: new LairDnD.Models.Listing(),
+      className: 'new-listing'
+    });
+    
+    this._swapView('$rootEl', nlView);
   },
 
   _initViews: function(){
-    window.nav = this._navbarView = new LairDnD.Views.Navbar({
+    //navbar and main(body) are fixed and nonchanging.
+    this.views.navbar = new LairDnD.Views.Navbar({
       $navbar: this.contents.$navbar
     });
+
+    this.views.main = new LairDnD.Views.MainView();
   },
 
   _swapView: function(select, view) {

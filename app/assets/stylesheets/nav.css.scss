@@ -1,0 +1,29 @@
+div.nav div.dropdown > ul.dropdown-menu {
+  margin-top: -10px;
+  height: 30px;
+  display: block;
+  overflow: hidden;
+  padding: 5px;
+  box-shadow: #eee 0 0 4px;
+}
+
+div.nav div.dropdown:hover > ul.dropdown-menu {
+    display: block;
+    height: 80px;
+    transition: height 1s;
+}
+
+nav .new-space a{
+  color:white
+}
+
+.new-space {
+  transform: translateY(5px);
+  background: #007a87;
+  border-radius: 5px;
+}
+
+nav li.new-space:hover > a {
+  background: #00a8ba;
+  transition: background .6s;
+}

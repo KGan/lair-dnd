@@ -16,4 +16,6 @@ window.LairDnD = {
 
 $(document).ready(function(){
   LairDnD.initialize();
+
+  filepicker.setKey("Am4pdKMVZS3i6kwFiJnYgz");
 });

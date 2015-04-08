@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require flpicker
 //= require serializejson
 //= require jquery-ui
 //= require bootstrap-sprockets
