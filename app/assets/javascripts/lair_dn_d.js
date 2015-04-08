@@ -7,7 +7,7 @@ window.LairDnD = {
   initialize: function() {
     new LairDnD.Routers.Router({
       $rootEl: $('#bb-content'),
-      $navBar: $('#navbar'),
+      $navbar: $('#navbar'),
       $flashes: $('#flashes')
     });
     Backbone.history.start();

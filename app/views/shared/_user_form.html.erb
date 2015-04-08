@@ -16,7 +16,7 @@
     <div class='modal-footer'>
   <% end %>
 
-  <input type="submit" class="btn btn-info form-control" value="Submit" />
+  <input type="submit" class="btn btn-info form-control" data-action="<%= is_login ? 'login' : 'signup' %>" value="Submit" />
 </form>
 
 <% if modal %>

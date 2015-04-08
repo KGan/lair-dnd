@@ -9,11 +9,13 @@ LairDnD.Routers.Router = Backbone.Router.extend({
   },
 
   landing: function() {
-    
+
   },
 
   _initViews: function(){
-
+    this._navbarView = new LairDnD.Views.Navbar({
+      $navbar: this.contents.$navbar
+    });
   },
 
   _swapView: function(select, view) {
