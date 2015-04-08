@@ -2,13 +2,17 @@
   <% attributes.each(function( key ) { %>
     <% if (key === 'id') return true; %>
     <div class='input-group'>
-      <label for='<%= key %>'><%= key %></label>
+
       <% if (key === 'photos') { %>
         <input type="filepicker" data-fp-apikey="Am4pdKMVZS3i6kwFiJnYgz"
-          data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-multiple="true"
+          data-fp-text='Upload Photos'
+          data-fp-mimetypes="image/*"
+          data-fp-container="modal"
+          data-fp-multiple="true"
           data-fp-services="COMPUTER,FACEBOOK,GOOGLE_DRIVE,GMAIL,INSTAGRAM,IMAGE_SEARCH,URL"
           onchange="out='';for(var i=0;i<event.fpfiles.length;i++){out+=event.fpfiles[i].url;out+=' '};alert(out)">
       <% } else { %>
+      <label for='<%= key %>'><%= key %></label>
       <input class='form-control' type=text name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
       <% } %>
     </div>

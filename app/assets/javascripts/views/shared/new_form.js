@@ -15,8 +15,8 @@ LairDnD.Views.NewForm = Backbone.View.extend({
       attributes: _(this.model.constructor._formAttrs_),
       naming: this.className
     });
-
     this.$el.html(content);
+    filepicker.constructWidget(this.$('input[type="filepicker"]'));
     return this;
   },
   submit: function(event) {
