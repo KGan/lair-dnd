@@ -8,11 +8,18 @@
     </div>
     <div class="input-group">
       <div class="input-group-addon ">Password</div>
-        <input class="form-control" type="password" name="user[password]" placeholder="******"/>        
-      <!--</label>-->
+        <input class="form-control" type="password" name="user[password]" placeholder="******"/>
     </div>
   </div>
-
+  <% if modal %>
+    </div>
+    <div class='modal-footer'>
+  <% end %>
 
   <input type="submit" class="btn btn-info form-control" value="Submit" />
 </form>
+
+<% if modal %>
+  <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+  </div>
+<% end %>

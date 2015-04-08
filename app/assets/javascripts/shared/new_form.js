@@ -1,5 +1,4 @@
-TrelloClone.Views.NewForm = Backbone.View.extend({
-  tagName:'li',
+LairDnD.Views.NewForm = Backbone.View.extend({
   template: JST['shared/new'],
   form_template: JST['shared/new_form'],
   events: {
@@ -14,11 +13,11 @@ TrelloClone.Views.NewForm = Backbone.View.extend({
     return this;
   },
   renderForm: function(event) {
-    if (this._formRendered) return;
+    if (this._formRendered || !this.model._formAttrs_) return;
     this._formRendered = true;
     var content = this.form_template({
       model: this.model,
-      attributes: _(this.model.formAttrs),
+      attributes: _(this.model._formAttrs_),
       naming: this.className
     });
 

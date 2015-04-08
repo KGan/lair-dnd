@@ -1,5 +1,5 @@
 class Api::ListingsController < Api::ApiController
-
+  skip_before_filter :require_login!, only:[:index, :show]
   def index
     @listings = Listing.all if (@listings = search)
     render :index
@@ -24,7 +24,7 @@ class Api::ListingsController < Api::ApiController
   end
 
   def show
-    @listing = Listing.include(*Listing.reflections).find(params[:id])
+    @listing = Listing.includes(Listing.reflections.keys.map(&:to_sym)).find(params[:id])
     unless @listing
       render json: ['no listing found'], status: 403
     end

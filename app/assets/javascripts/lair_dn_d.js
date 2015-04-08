@@ -3,8 +3,13 @@ window.LairDnD = {
   Collections: {},
   Views: {},
   Routers: {},
+  Mixins: {},
   initialize: function() {
-    new LairDnD.Routers.Router({$rootEl: $('#bb-content')});
+    new LairDnD.Routers.Router({
+      $rootEl: $('#bb-content'),
+      $navBar: $('#navbar'),
+      $flashes: $('#flashes')
+    });
     Backbone.history.start();
   }
 };

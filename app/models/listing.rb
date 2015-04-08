@@ -17,7 +17,7 @@
 
 class Listing < ActiveRecord::Base
   belongs_to :user, class_name: 'User', primary_key: :id, foreign_key: :owner_id
-  validates_presence_of :owner, :title, :accomodates, :price, :description
+  validates_presence_of :user, :title, :accomodates, :price, :description
 
 
   def is_owner?(u)

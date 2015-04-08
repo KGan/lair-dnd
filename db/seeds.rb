@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Session.destroy_all
 User.destroy_all
 Listing.destroy_all
 
@@ -20,8 +21,8 @@ end
   Listing.create(owner_id: rand(User.count),
                  title: Faker::Lorem.words(4, true),
                  accomodates: rand(5),
-                 price: rand(20,500),
-                 description: Faker::Lorem.paragraphs
+                 price: rand(20..500),
+                 description: Faker::Lorem.paragraphs,
                  rules: Faker::Lorem.paragraphs
                  )
 

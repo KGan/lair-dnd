@@ -12,10 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require flpicker
+//= require serializejson
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require underscore
 //= require backbone
 //= require lair_dn_d
+//= require_tree ./utils
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
