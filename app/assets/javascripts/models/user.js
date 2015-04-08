@@ -1,4 +1,4 @@
-LairDnD.Models.Session = Backbone.Model.extend({
+LairDnD.Models.User = Backbone.Model.extend({
   urlRoot: '/api/users'
 
 });

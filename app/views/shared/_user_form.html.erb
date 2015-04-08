@@ -1,4 +1,4 @@
-<form action="<%= url %>" method="POST">
+<form action="<%= url %>" method="POST" data-action="<%= is_login ? 'login' : 'signup' %>">
   <%= csrf_inject %>
   <div class="form-group">
     <div class="input-group">

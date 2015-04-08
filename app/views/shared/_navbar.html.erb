@@ -41,8 +41,8 @@
       </div>
 
       <div class="modal-body">
-        <div class='flashes form-control'></div>
-        <%= render 'shared/user_form', url: sessions_url, modal: true %>
+        <div class='flashes'></div>
+        <%= render 'shared/user_form', url: sessions_url, modal: true, is_login: true %>
     </div>
   </div>
 </div>
@@ -57,91 +57,11 @@
       </div>
 
       <div class="modal-body">
-        <%= render 'shared/user_form', url: users_url, modal: true %>
+        <div class='flashes'></div>
+        <%= render 'shared/user_form', url: users_url, modal: true, is_login: false %>
     </div>
   </div>
 </div>
 
 
 </nav>
-
-<!-- AirBnB's Actual Modal is via an Ajax Request
-
-<div class="modal signup">
-
-  <div class="modal-header panel-header show-sm">
-    Log In
-    <a href="#" class="modal-close" data-behavior="modal-close"></a>
-  </div>
-
-<div class="alert alert-with-icon alert-error alert-header panel-header hidden-element"
-     id=notice>
-  <i class="icon alert-icon icon-alert-alt"></i>
-
-</div>
-
-  <div class='panel-padding panel-body'>
-
-
-
-<a href="https://www.facebook.com/v2.0/dialog/oauth?client_id=138566025676&amp;redirect_uri=https%3A%2F%2Fwww.airbnb.com%2Fauthenticate&amp;scope=email%2Cuser_birthday%2Cuser_likes%2Cuser_education_history%2Cuser_hometown%2Cuser_location%2Cuser_friends" class="fb-button fb-blue btn icon-btn btn-block btn-large row-space-1 btn-facebook" data-populate_uri="" data-redirect_uri="https://www.airbnb.com/authenticate">
-	<span class="icon-container">
-    <i class="icon icon-facebook"></i>
-	</span>
-	<span class="text-container">
-    Log in with Facebook
-  </span>
-</a>
-
-
-<a href="/oauth_connect?service=google&amp;from=google_signup" class="btn icon-btn btn-block btn-large row-space-1 btn-google">
-  <span class="icon-container">
-    <i class="icon icon-google-plus"></i>
-  </span>
-  <span class="text-container">
-    Log in with Google
-  </span>
-</a>
-
-
-  <div class="signup-or-separator">
-    <h6 class="text signup-or-separator--text">or</h6>
-    <hr>
-  </div>
-
-<form accept-charset="UTF-8" action="/authenticate" class="signin-form login-form" data-action="Signin" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="V4$.airbnb.com$gk11g9A4ces$lJvASe1-lSYX5v6IBPhTMFuMU8cvNvB7jre0_g4ZwLU=" /></div>
-  <input id="from" name="from" type="hidden" value="email_login" />
-
-
-
-  <div class="control-group row-space-1">
-    <input class="decorative-input inspectletIgnore" id="signin_email" name="email" placeholder="Email Address" type="email" />
-  </div>
-  <div class="control-group row-space-2">
-    <input class="decorative-input inspectletIgnore" id="signin_password" name="password" placeholder="Password" type="password" />
-  </div>
-
-  <div class="clearfix row-space-2">
-    <label for="remember_me2" class='checkbox remember-me'>
-      <input type="checkbox" name="remember_me" id="remember_me2" value="true" class="remember_me"/>
-      Remember me
-    </label>
-    <a href="/forgot_password" class="forgot-password pull-right">Forgot password?</a>
-  </div>
-
-  <button type="submit" class="btn btn-block btn-primary btn-large" id="user-login-btn">
-    Log In
-  </button>
-</form>
-    <hr>
-    <div class="text-left">
-      Don't have an account?
-      <a href="/signup_login" class="modal-link link-to-signup-in-login" data-modal-href="/signup_modal">
-        Sign up
-</a>    </div>
-  </div>
-  <form accept-charset="UTF-8" action="/authenticate" class="hidden-element hide in_modal" id="facebook_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="V4$.airbnb.com$gk11g9A4ces$lJvASe1-lSYX5v6IBPhTMFuMU8cvNvB7jre0_g4ZwLU=" /></div>
-
-
-</form>
-</div> -->

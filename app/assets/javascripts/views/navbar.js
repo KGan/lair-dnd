@@ -4,11 +4,13 @@ LairDnD.Views.Navbar = Backbone.View.extend({
     "submit form": 'loginsignup'
   },
   initialize: function(options) {
-    this.el = options.$navbar;
+    this.$el = options.$navbar;
+    this.delegateEvents();
   },
   loginsignup: function(event) {
+    event.preventDefault();
     var $form = $(event.currentTarget);
-    var action = $form.$('input[type="submit"]').eq(0).data('action');
+    var action = $form.data('action');
     if (action === 'login') {
       var m = new LairDnD.Models.Session();
     } else {
@@ -21,9 +23,10 @@ LairDnD.Views.Navbar = Backbone.View.extend({
       },
       error: function(model, response) {
         var content = this.error_template({
-          flash: responses
+          flash: _(response.responseJSON)
         });
-      }
+        $form.siblings('.flashes').html(content);
+      }.bind(this)
     })
   }
 })
