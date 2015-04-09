@@ -22,6 +22,10 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   render: function(){
     var content = this.template({
     });
+    var $p_img = this.$('a.primary_image > img');
+    var w = $p_img.width(), h = $p_img.height();
+    var ww = $('window').width(), wh = $('window').height();
+
     this.$el.html(content);
     this.renderModal();
     return this;

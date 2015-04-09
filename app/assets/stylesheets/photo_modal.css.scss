@@ -1,4 +1,6 @@
 .listing-show {
+  a.primary_image > img {
+  }
   a.close {
     position:fixed;
     top:30px;
@@ -15,14 +17,11 @@
       height: 100px;
       overflow: hidden;
       .item {
-        display: flex;
-        justify-content:center;
       }
     }
 
     #photoCarousel {
-      position:fixed;
-      top: 40%;
+      margin-top: 200px;
       width:100%;
       img.item {
         max-width:800;
@@ -45,12 +44,8 @@
     #thumbCarousel {
       margin-bottom: 10px;
       width:100%;
-      img.item {
-        opacity: 0;
-        transition: opacity 2s;
-        &:active {
-          opacity: 100;
-        }
+      .item {
+        margin:auto;
       }
       .carousel-control {
         position:absolute;

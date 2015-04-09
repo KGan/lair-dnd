@@ -7,7 +7,7 @@
             <!-- Top part of the slider -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" id="carousel-bounding-box">
-                    <div class="carousel slide" id="photoCarousel">
+                    <div class="carousel slide" id="photoCarousel" data-interval='false'>
                         <!-- Carousel items -->
                         <div class="carousel-inner">
                           <% photos.each(function(photo, index){ %>
@@ -30,7 +30,7 @@
     <div class="row">
             <!-- Bottom switcher of slider -->
         <div class="col-md-12">
-          <div id="thumbCarousel" class="carousel slide">
+          <div id="thumbCarousel" class="carousel slide" data-interval='false'>
 
                 <ol class="carousel-indicators">
                   <% for(var i = 0 ; i <= photos.length / 5; i ++) { %>
@@ -45,7 +45,11 @@
               <div class='carousel-inner thumbnails'>
                   <div class='item active'>
                   <% photos.each(function(photo, index) {%>
-                    <div class='col-md-2'>
+                    <div class='col-md-2
+                      <% if ((index + 1) % 5 === 1) { %>
+                        col-md-offset-1
+                      <% } %>
+                      '>
                       <a href='javascript:void(0)' class='thumbnail selector' data-c-id='<%=index%>'>
                         <img src='http://placehold.it/170x100&text=<%= index %>'>
                       </a>
