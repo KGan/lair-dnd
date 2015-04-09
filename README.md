@@ -3,7 +3,7 @@
 ![logo]
 [logo]: ./docs/wireframes/logo.png
 
-[Heroku link][heroku]
+[Site link][heroku]
 
 [heroku]:http://lairdnd.com
 
@@ -13,12 +13,16 @@ state of the art lairs and dungeons
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
-- [ ] Create accounts / Guest Account
-- [ ] Create sessions (log in)
-- [ ] Create Residence
-- [ ] Post Residence Details
+- [x] Create accounts
+- [ ] Guest Account
+- [x] Create sessions (log in)
+- [x] Create Residence
+- [x] Post Residence Details
 - [ ] Mark Residence on Map
 - [ ] View Residences/Photos/etc
+ - [ ] Photo and Photo Carousel
+ - [ ] Basic info
+ - [ ] details + amenities
 - [ ] Leave Comments on places
 - [ ] Ratings/Reviews
 - [ ] Search for places by
