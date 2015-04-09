@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  residence_id: 1
+  photourl: MyString
+  verified: false
+
+two:
+  residence_id: 1
+  photourl: MyString
+  verified: false

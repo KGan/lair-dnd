@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407204833) do
+ActiveRecord::Schema.define(version: 20150409171801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,12 +35,25 @@ ActiveRecord::Schema.define(version: 20150407204833) do
     t.integer  "currency_id"
     t.text     "description"
     t.text     "rules"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "minimum_stay"
+    t.boolean  "availability_default"
   end
 
   add_index "listings", ["currency_id"], name: "index_listings_on_currency_id", using: :btree
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "residence_id"
+    t.string   "photourl"
+    t.boolean  "verified"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "photos", ["residence_id"], name: "index_photos_on_residence_id", using: :btree
+  add_index "photos", ["verified"], name: "index_photos_on_verified", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.integer  "user_id"
