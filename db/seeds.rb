@@ -19,11 +19,32 @@ end
 
 100.times do
   Listing.create(owner_id: rand(User.count),
-                 title: Faker::Lorem.words(4, true),
+                 title: Faker::Lorem.words(4, true).join(' '),
                  accomodates: rand(5),
                  price: rand(20..500),
-                 description: Faker::Lorem.paragraphs,
-                 rules: Faker::Lorem.paragraphs
+                 description: Faker::Lorem.paragraphs.join("\n"),
+                 rules: Faker::Lorem.paragraphs.join("\n"),
+                 availability_default: 1,
+                 minimum_stay: rand(1..5)
                  )
 
+end
+
+300.times do
+  listing = Listing.find(rand(Listing.count) + 1)
+  tail = Faker::Lorem.words(3, true).join(' ')
+  Photo.create(user_id: listing.owner_id,
+               listing_id: listing.id,
+               photo_url: "http://placehold.it/770x300&text=#{tail}",
+               thumb_url: "http://placehold.it/170x100&text=#{tail}",
+               verified: true
+              )
+
+end
+
+Listing.all.each do |listing|
+  if listing.photos
+    randphoto = listing.photos[rand(listing.photos.length)]
+    randphoto.main = true if randphoto
+  end
 end

@@ -14,7 +14,7 @@
                             <div class="<% if(index === selected_id){ %>
                                 <%= 'active' %>
                               <% } %> item" data-slide-number='<%= index %>'>
-                            <img src='http://placehold.it/770x300&text=<%= index %>'></div>
+                            <img src='<%= photo.get("photo_url") %>'></div>
                           <% }) %>
                         </div><!-- Carousel nav -->
                         <a class="carousel-control left" data-slide="prev" href="javascript:void(0)">‹</a>
@@ -33,7 +33,7 @@
           <div id="thumbCarousel" class="carousel slide" data-interval='false'>
 
                 <ol class="carousel-indicators">
-                  <% for(var i = 0 ; i <= photos.length / 5; i ++) { %>
+                  <% for(var i = 0 ; i < photos.length / 5; i ++) { %>
                     <li data-target='#thumbCarousel' data-slide-to='<%= i %>'
                       <% if (i == selected_id) { %>
                         <%= 'class="active"' %>
@@ -51,12 +51,12 @@
                       <% } %>
                       '>
                       <a href='javascript:void(0)' class='thumbnail selector' data-c-id='<%=index%>'>
-                        <img src='http://placehold.it/170x100&text=<%= index %>'>
+                        <img src='<%=photo.get("thumb_url")%>'>
                       </a>
                     </div>
                     <% if ((index + 1) % 5 === 0) { %>
                       </div>
-                      <% if (index !== photos.length) { %>
+                      <% if (index + 1 !== photos.length) { %>
                         <div class='item'>
                       <% } %>
                     <% } %>

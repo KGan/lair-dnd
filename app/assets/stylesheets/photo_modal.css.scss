@@ -47,6 +47,10 @@
       .item {
         margin:auto;
       }
+      .carousel-indicators {
+        position:absolute;
+        bottom: -50px;
+      }
       .carousel-control {
         position:absolute;
         &.left {

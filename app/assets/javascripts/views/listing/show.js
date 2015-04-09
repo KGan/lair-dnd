@@ -1,11 +1,14 @@
+// modal and basic view are not subviews,
+// the detail view will be its own view
+// maps will be its own view
+
 LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
-  template: JST['listings/show'],
   photoModal_template: JST['listings/modal_photos'],
-  initialize: function(){
+  initialize: function(options){
+    this.$el = options.$el;
     this.listenTo(this.model, 'sync', this.render);
     this.carousel_id = 0;
   },
-  className: 'listing-show',
   events: {
     'click .thumbnail.selector': 'selectPhoto',
     'click #photoCarousel a.carousel-control': 'photoSlide',
@@ -20,21 +23,20 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   },
 
   render: function(){
-    var content = this.template({
-    });
-    var $p_img = this.$('a.primary_image > img');
-    var w = $p_img.width(), h = $p_img.height();
-    var ww = $('window').width(), wh = $('window').height();
-
-    this.$el.html(content);
+    // var content = this.template({
+    // });
+    // var $p_img = this.$('a.primary_image > img');
+    // var w = $p_img.width(), h = $p_img.height();
+    // var ww = $('window').width(), wh = $('window').height();
+    //
+    // this.$el.html(content);
     this.renderModal();
     return this;
   },
 
   renderModal: function() {
     var modal = this.photoModal_template({
-      //photos: this.model.photos,
-      photos: _([1,2,3,4,5,6,7,8,9,10,1,2,10]),
+      photos: this.model.photos(),
       selected_id: this.carousel_id
     });
     this.$('#photoCarousel').carousel({

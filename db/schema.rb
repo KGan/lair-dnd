@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409171801) do
+ActiveRecord::Schema.define(version: 20150409223518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,15 +44,48 @@ ActiveRecord::Schema.define(version: 20150409171801) do
   add_index "listings", ["currency_id"], name: "index_listings_on_currency_id", using: :btree
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
 
-  create_table "photos", force: :cascade do |t|
-    t.integer  "residence_id"
-    t.string   "photourl"
-    t.boolean  "verified"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "location_aliases", force: :cascade do |t|
+    t.integer  "location_id"
+    t.string   "name"
+    t.integer  "area_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "photos", ["residence_id"], name: "index_photos_on_residence_id", using: :btree
+  add_index "location_aliases", ["area_id"], name: "index_location_aliases_on_area_id", using: :btree
+  add_index "location_aliases", ["location_id"], name: "index_location_aliases_on_location_id", using: :btree
+
+  create_table "location_mappings", force: :cascade do |t|
+    t.integer  "listing_id"
+    t.integer  "location_alias_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "location_mappings", ["listing_id"], name: "index_location_mappings_on_listing_id", using: :btree
+  add_index "location_mappings", ["location_alias_id"], name: "index_location_mappings_on_location_alias_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "longitude"
+    t.integer  "latitude"
+    t.integer  "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "listing_id",                 null: false
+    t.integer  "user_id"
+    t.string   "photo_url",                  null: false
+    t.string   "thumb_url",                  null: false
+    t.boolean  "verified",   default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "main"
+  end
+
+  add_index "photos", ["listing_id"], name: "index_photos_on_listing_id", using: :btree
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
   add_index "photos", ["verified"], name: "index_photos_on_verified", using: :btree
 
   create_table "sessions", force: :cascade do |t|

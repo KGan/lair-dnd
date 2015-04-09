@@ -1,8 +1,8 @@
-LairDnD.Routers.Router = Backbone.Router.extend({
+LairDnD.Routers.LandingRouter = Backbone.Router.extend({
   routes: {
-    '': 'landing',
+    '': 'default',
     'listing/new': 'newListing',
-    'listing/:id': 'showListing',
+    'search': 'searchListing',
   },
   initialize: function(options) {
     this.contents = options;
@@ -13,6 +13,22 @@ LairDnD.Routers.Router = Backbone.Router.extend({
     this._initViews();
   },
 
+  default: function() {
+    var path = window.location.pathname;
+    if (path.slice(0, path.indexOf('?')).length < 2) {
+      this.landing();
+    } else {
+      var listshowreg = path.match(/\/listings\/(\d+)/);
+      if (listshowreg){
+        var listing = new LairDnD.Models.Listing({
+          id: parseInt(listshowreg[listshowreg.length - 1])
+        });
+        listing.fetch();
+        this.showListing(listing.id);
+      }
+    }
+  },
+
   landing: function() {
     var landingView = new LairDnD.Views.Landing();
     this._swapView('$rootEl', landingView);
@@ -20,8 +36,9 @@ LairDnD.Routers.Router = Backbone.Router.extend({
 
   showListing: function(id) {
     var model = this.collections.listings.getOrFetch(id);
-    var listingView = window.lv = new LairDnD.Views.ListingShow({
+    var listingView = new LairDnD.Views.ListingShow({
       model: model,
+      $el: $('#listing-show')
     });
     this._swapView('$rootEl', listingView);
   },
@@ -45,10 +62,17 @@ LairDnD.Routers.Router = Backbone.Router.extend({
   },
 
   _swapView: function(select, view) {
+    this._hideModals();
     if (this.views[select]) {
       this.views[select].remove();
     }
     this.views[select] = view;
     this.contents[select].html(view.render().$el);
+  },
+
+  _hideModals: function() {
+    $('.modal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
   }
 });

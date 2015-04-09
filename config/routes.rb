@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new]
   resources :sessions, only: [:create, :destroy]
+  resources :listings, only: [:show]
 
   namespace :api, defaults: { format: :json } do
     resources :listings

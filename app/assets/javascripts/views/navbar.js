@@ -6,7 +6,7 @@ LairDnD.Views.Navbar = Backbone.View.extend({
   },
   initialize: function(options) {
     this.$el = options.$navbar;
-    this.delegateEvents();
+    // this.delegateEvents();
   },
   loginsignup: function(event) {
     event.preventDefault();

@@ -5,7 +5,7 @@ window.LairDnD = {
   Routers: {},
   Mixins: {},
   initialize: function() {
-    new LairDnD.Routers.Router({
+    new LairDnD.Routers.LandingRouter({
       $rootEl: $('#bb-content'),
       $navbar: $('#navbar'),
       $flashes: $('#flashes')
