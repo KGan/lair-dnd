@@ -1,0 +1,71 @@
+
+<div class='container'>
+
+    <!-- Slider -->
+    <div class="row">
+        <div class="span12" id="slider">
+            <!-- Top part of the slider -->
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" id="carousel-bounding-box">
+                    <div class="carousel slide" id="photoCarousel">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                          <% photos.each(function(photo, index){ %>
+                            <div class="<% if(index === selected_id){ %>
+                                <%= 'active' %>
+                              <% } %> item" data-slide-number='<%= index %>'>
+                            <img src='http://placehold.it/770x300&text=<%= index %>'></div>
+                          <% }) %>
+                        </div><!-- Carousel nav -->
+                        <a class="carousel-control left" data-slide="prev" href="javascript:void(0)">‹</a>
+                        <a class="carousel-control right" data-slide="next" href="javascript:void(0)">›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/Slider-->
+
+
+
+    <div class="row">
+            <!-- Bottom switcher of slider -->
+        <div class="col-md-12">
+          <div id="thumbCarousel" class="carousel slide">
+
+                <ol class="carousel-indicators">
+                  <% for(var i = 0 ; i <= photos.length / 5; i ++) { %>
+                    <li data-target='#thumbCarousel' data-slide-to='<%= i %>'
+                      <% if (i == selected_id) { %>
+                        <%= 'class="active"' %>
+                      <% } %>
+                      ></li>
+                  <% } %>
+                </ol>
+
+              <div class='carousel-inner thumbnails'>
+                  <div class='item active'>
+                  <% photos.each(function(photo, index) {%>
+                    <div class='col-md-2'>
+                      <a href='javascript:void(0)' class='thumbnail selector' data-c-id='<%=index%>'>
+                        <img src='http://placehold.it/170x100&text=<%= index %>'>
+                      </a>
+                    </div>
+                    <% if ((index + 1) % 5 === 0) { %>
+                      </div>
+                      <% if (index !== photos.length) { %>
+                        <div class='item'>
+                      <% } %>
+                    <% } %>
+                  <% }) %>
+                <% if (photos.length % 5 !== 0) { %>
+                  </div>
+                <% } %>
+            </div>
+
+            <a class="carousel-control left" data-slide="prev" href="javascript:void(0)">‹</a>
+            <a class="carousel-control right" data-slide="next" href="javascript:void(0)">›</a>
+
+        </div>
+      </div>
+    </div>
+</div>

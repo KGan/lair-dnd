@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'sprockets-rails'
-
+gem 'font-awesome-rails'
 gem 'backbone-on-rails'
 gem 'ejs'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

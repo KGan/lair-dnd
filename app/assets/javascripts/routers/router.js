@@ -1,11 +1,15 @@
 LairDnD.Routers.Router = Backbone.Router.extend({
   routes: {
     '': 'landing',
-    'listing/new': 'newListing'
+    'listing/new': 'newListing',
+    'listing/:id': 'showListing',
   },
   initialize: function(options) {
     this.contents = options;
     this.views = {};
+    this.collections = {
+      listings: new LairDnD.Collections.Listings()
+    };
     this._initViews();
   },
 
@@ -14,12 +18,20 @@ LairDnD.Routers.Router = Backbone.Router.extend({
     this._swapView('$rootEl', landingView);
   },
 
+  showListing: function(id) {
+    var model = this.collections.listings.getOrFetch(id);
+    var listingView = window.lv = new LairDnD.Views.ListingShow({
+      model: model,
+    });
+    this._swapView('$rootEl', listingView);
+  },
+
   newListing: function() {
     var nlView = new LairDnD.Views.NewForm({
       model: new LairDnD.Models.Listing(),
       className: 'new-listing'
     });
-    
+
     this._swapView('$rootEl', nlView);
   },
 

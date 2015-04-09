@@ -1,0 +1,72 @@
+.listing-show {
+  a.close {
+    position:fixed;
+    top:30px;
+    right: 30px;
+    color:white;
+  }
+  .modal-content {
+    background: transparent;
+    width: 100;
+    height: 100%;
+    div.thumbnails {
+      margin-top: 100px;
+      background: transparent;
+      height: 100px;
+      overflow: hidden;
+      .item {
+        display: flex;
+        justify-content:center;
+      }
+    }
+
+    #photoCarousel {
+      position:fixed;
+      top: 40%;
+      width:100%;
+      img.item {
+        max-width:800;
+      }
+      .carousel-control {
+        position:fixed;
+        &.left {
+          left: 12px;
+        }
+        &.right {
+          right: -12px;
+        }
+        top: 50%;
+        height: 100%;
+        font-size: 100px;
+        background-image: none;
+      }
+    }
+
+    #thumbCarousel {
+      margin-bottom: 10px;
+      width:100%;
+      img.item {
+        opacity: 0;
+        transition: opacity 2s;
+        &:active {
+          opacity: 100;
+        }
+      }
+      .carousel-control {
+        position:absolute;
+        &.left {
+          left: 12px;
+        }
+        &.right {
+          right: -12px;
+        }
+        top: 50%;
+        height: 100%;
+        font-size: 40px;
+        width: 1em;
+        background-image: none;
+      }
+    }
+  }
+
+}
