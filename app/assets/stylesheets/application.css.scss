@@ -12,14 +12,13 @@
  *
  *= require_tree .
  *= require_self
-
+ *= require jquery.ui.all
  *= require font-awesome
 
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "semantic-ui";
-
 
 //reset
 

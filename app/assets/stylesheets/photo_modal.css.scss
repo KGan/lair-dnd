@@ -1,5 +1,5 @@
 .listing-show {
-  
+
   a.close {
     position:fixed;
     top:30px;
@@ -21,9 +21,11 @@
 
     #photoCarousel {
       margin-top: 200px;
+      min-height: 300px;
       width:100%;
       img.item {
         max-width:800;
+        min-height:inherit;
       }
       .carousel-control {
         position:fixed;

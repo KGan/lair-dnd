@@ -1,0 +1,29 @@
+
+<div class='col-md-12 form-header'>
+  <div class='pull-left'>
+    <span class='h3'><i class='icon dollar'></i><%= listing.price %></span>
+  </div>
+  <div class='pull-right'>
+    <span class='h4'>Per Night</span>
+  </div>
+</div>
+<form>
+  <div class="form-group col-md-4">
+    <label class='' for="checkin">Check In</label>
+    <input name='checkin' class="datepicker form-control" id="checkin" placeholder="mm/dd/yyyy">
+  </div>
+  <div class="form-group col-md-4">
+    <label class='' for="checkout">Check Out</label>
+    <input name='checkout' class="datepicker form-control" id="checkout" placeholder="mm/dd/yyyy">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="guests">Guests</label>
+    <select name='guests' class="form-control" id="guests">
+      <% (1..listing.accomodates).each do |num| %>
+        <option value='<%= num %>'><%= num %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <input type='submit' class='submit reservation form-control' value='Make Reservation'>
+</form>

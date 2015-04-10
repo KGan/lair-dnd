@@ -7,6 +7,7 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   initialize: function(options){
     this.$el = options.$el;
     this.listenTo(this.model, 'sync', this.render);
+    this.setupBooking();
     this.carousel_id = 0;
   },
   events: {
@@ -23,6 +24,40 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
     this.$('#thumbCarousel').carousel((id / 5) | 0);
   },
 
+  setupBooking: function() {
+    this.$bookingForm = $('.booking-form');
+    this.bookstick = this.$bookingForm.offset().top;
+    this.setupDatepicker();
+    $(window).on('scroll.stick', this.scrollOrStick.bind(this));
+  },
+
+  setupDatepicker: function(){
+    $( "#checkin" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#checkout" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#checkout" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#checkin" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  },
+
+  scrollOrStick: function(e) {
+    if($(window).scrollTop() > this.bookstick - 40) {
+      this.$bookingForm.addClass('affixed');
+    } else {
+      this.$bookingForm.removeClass('affixed');
+    }
+  },
+
   render: function(){
     this.renderModal();
     this.renderSeeMores();
@@ -30,30 +65,34 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   },
 
   renderSeeMores: function(){
+    if(this._seemores) {
+      return;
+    }
+    this._seemores = true;
     var $seemore = $('<a href="javascript:void(0)">');
-    $seemore.class('listing-expand');
-    $seemore.text('See More')
+    $seemore.addClass('listing-expand');
+    $seemore.text('See More');
+    $seemore.data('toggled', false);
     $('.listing-section').append($seemore);
   },
 
   expandListing: function(e) {
     var $clicked = $(e.currentTarget);
-    $clicked.toggle(
-      function(){
-        this.animate({
-          height: '100%'
-        }, 1000);
-        this.text('Collapse');
-      }.bind($clicked.closest('.listing-section')),
-      function(){
-        this.animate({
-          height: '150px'
-        }, 1000);
-        this.text('See More');
-      }.bind($clicked.closest('.listing-section'))
-    )
-    var $section = $clicked.closest('listing-section')
-    $section.toggleClass('expanded');
+    var $parentSection = $clicked.closest('.listing-section');
+    if ($clicked.data('toggled')) {
+      $clicked.data('toggled', false);
+      $parentSection.css({
+        height: '150px'
+      });
+      $parentSection.find('a.listing-expand').text('See More');
+    } else {
+      $clicked.data('toggled', true);
+      $parentSection.css({
+        height: '100%'
+      });
+      $parentSection.find('a.listing-expand').text('Collapse');
+    }
+
   },
 
   renderModal: function() {

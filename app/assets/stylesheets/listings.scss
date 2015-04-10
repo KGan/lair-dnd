@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
 a.primary_image > img {
   width:100%;
   height: 60vh;
@@ -20,7 +19,7 @@ a.primary_image > img {
     display: block;
     height: 2px;
     background: #aaa;
-    width: 100%;
+    width: 110%;
   }
   &:first-of-type {
     height: 100%;
@@ -29,10 +28,7 @@ a.primary_image > img {
   padding: 20px 10px 20px 0px;
   height: 150px;
   overflow: hidden;
-  &:hover {
-    height: 100%;
-  }
-  transition: height 1s;
+  transition: height .3s;
   transition-timing-function: ease;
 }
 
@@ -43,17 +39,30 @@ a.primary_image > img {
 }
 
 .cate-detail {
-  &:before {
-    content: "";
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #aaa;
+  // &:before {
+  //   content: "";
+  //   position: absolute;
+  //   display: block;
+  //   top: 0;
+  //   bottom: 0;
+  //   width: 2px;
+  //   background: #aaa;
+  // }
+  & i.unprovided {
+    color: #aaa;
+    &+span{
+      text-decoration: line-through;
+    }
   }
   overflow: hidden;
   margin-top: 20px;
+}
+
+.listing-expand {
+  position:absolute;
+  bottom: 0px;
+  right: 10px;
+  font-size: 12px;
 }
 
 .cate-item:nth-child(n+2) {

@@ -1,0 +1,53 @@
+// Place all the styles related to the Bookings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.booking-form {
+  .form-header {
+    width:315px;
+    height:38px;
+    display:flex;
+    justify-content: center;
+    background: #000;
+    opacity: .6;
+    color: #fff;
+    i.icon {
+      width: .5em;
+    }
+  }
+  width: 315px;
+  padding: 0px;
+  background: #fff;
+  border: 1px solid #919191;
+  margin-top: -40px;
+
+  form {
+    margin: 20px;
+  }
+  .form-group {
+    label {
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    margin-bottom: 15px;
+    padding: 2px;
+  }
+
+  input, select {
+    border-radius:0;
+    bottom: 0;
+    padding: 4px;
+  }
+  input[type='submit'] {
+    background: #ff0040;
+    margin-top: 25px;
+  }
+  &.affixed {
+    position:fixed;
+    top:0;
+    width: 315px;
+  }
+
+}

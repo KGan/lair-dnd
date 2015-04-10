@@ -17,7 +17,7 @@ gem 'sprockets-rails'
 
 gem 'font-awesome-rails'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
-
+gem 'jquery-ui-rails'
 
 gem 'backbone-on-rails'
 gem 'ejs'
