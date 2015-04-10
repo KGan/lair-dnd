@@ -13,6 +13,7 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
     'click .thumbnail.selector': 'selectPhoto',
     'click #photoCarousel a.carousel-control': 'photoSlide',
     'click #thumbCarousel a.carousel-control': 'thumbSlide',
+    'click .listing-expand': 'expandListing'
   },
 
   selectPhoto: function(e) {
@@ -23,15 +24,36 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   },
 
   render: function(){
-    // var content = this.template({
-    // });
-    // var $p_img = this.$('a.primary_image > img');
-    // var w = $p_img.width(), h = $p_img.height();
-    // var ww = $('window').width(), wh = $('window').height();
-    //
-    // this.$el.html(content);
     this.renderModal();
+    this.renderSeeMores();
     return this;
+  },
+
+  renderSeeMores: function(){
+    var $seemore = $('<a href="javascript:void(0)">');
+    $seemore.class('listing-expand');
+    $seemore.text('See More')
+    $('.listing-section').append($seemore);
+  },
+
+  expandListing: function(e) {
+    var $clicked = $(e.currentTarget);
+    $clicked.toggle(
+      function(){
+        this.animate({
+          height: '100%'
+        }, 1000);
+        this.text('Collapse');
+      }.bind($clicked.closest('.listing-section')),
+      function(){
+        this.animate({
+          height: '150px'
+        }, 1000);
+        this.text('See More');
+      }.bind($clicked.closest('.listing-section'))
+    )
+    var $section = $clicked.closest('listing-section')
+    $section.toggleClass('expanded');
   },
 
   renderModal: function() {

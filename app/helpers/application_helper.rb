@@ -18,45 +18,24 @@ module ApplicationHelper
     current_user.admin? || (item.try(:user_id) == current_user.id)
   end
 
-  def render_heirarchy(heirarchy)
-   return unless heirarchy
-   html_string = "Posted To: "
-   heirarchy.each do |elem|
-     html_string += link_to elem.title, url_h(elem, nil, true)
-     html_string += " | "
-   end
-   html_string.html_safe
- end
 
- def comment_tree(commentable, children_hash)
-  children = children_hash[commentable.id]
-   html="<li>#{render 'shared/comment', comment: commentable}</li>"
-   if children.empty?
-     return html.html_safe
-   else
-     children.each do |comment|
-       html+="<ul>"
-       html+= comment_tree(comment, children_hash)
-       html+="</ul>"
-     end
-     html.html_safe
-   end
- end
-
-  def comment_options(comment)
-    if comment.user_id == current_user.id
-      (<<-HTML).html_safe
-      <div class="dropdown">
-        <a class="dropdown-toggle"    href='#' data-toggle="dropdown"
-                                      role="button"
-                                      aria-expanded="false"><span class="caret"></span></a>
-        <ul class='dropdown-menu' role='menu'>
-            <li role="presentation" >#{link_to "Delete Comment", comment_url(comment), method: :delete }</li>
-        </ul>
-      </div>
-      HTML
-    end
+  def icon
+    {
+      'internet' => 'icon laptop large',
+      'kitchen'  => 'icon food large',
+      'tv'       => 'icon desktop large',
+      'dungeon'       => 'icon desktop large',
+      'moat'       => 'icon desktop large',
+      'secret_passages'       => 'icon desktop large',
+      'random_mosnters'       => 'icon desktop large',
+      'endless_dungeons'       => 'icon desktop large',
+      'dragons'       => 'icon desktop large',
+      'maze'       => 'icon desktop large',
+      'treasure'       => 'icon desktop large',
+      'high_tower_room'       => 'icon desktop large',
+      'grand_library'       => 'icon desktop large',
+      'default'  => 'icon checkmark large',
+    }
   end
-
 
 end

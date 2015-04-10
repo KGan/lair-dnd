@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410001446) do
+ActiveRecord::Schema.define(version: 20150410051335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "amenities", force: :cascade do |t|
+    t.integer  "listing_id"
+    t.boolean  "internet"
+    t.boolean  "tv"
+    t.boolean  "kitchen"
+    t.boolean  "dungeon"
+    t.boolean  "moat"
+    t.boolean  "secret_passages"
+    t.boolean  "random_monsters"
+    t.boolean  "endless_dungeons"
+    t.boolean  "dragons"
+    t.boolean  "maze"
+    t.boolean  "treasure"
+    t.boolean  "high_tower_room"
+    t.boolean  "grand_library"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -43,9 +62,6 @@ ActiveRecord::Schema.define(version: 20150410001446) do
     t.integer  "bedrooms"
     t.integer  "beds"
     t.integer  "bathrooms"
-    t.boolean  "internet"
-    t.boolean  "kitchen"
-    t.boolean  "tv"
     t.time     "checkin"
     t.time     "checkout"
   end

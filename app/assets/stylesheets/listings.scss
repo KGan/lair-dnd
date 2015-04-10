@@ -22,6 +22,40 @@ a.primary_image > img {
     background: #aaa;
     width: 100%;
   }
+  &:first-of-type {
+    height: 100%;
+  }
+  position: relative;
   padding: 20px 10px 20px 0px;
+  height: 150px;
+  overflow: hidden;
+  &:hover {
+    height: 100%;
+  }
+  transition: height 1s;
+  transition-timing-function: ease;
+}
 
+.cate-title {
+  color: #919191;
+  margin-top: 20px;
+  height: 100%;
+}
+
+.cate-detail {
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #aaa;
+  }
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.cate-item:nth-child(n+2) {
+  margin-top: 20px;
 }

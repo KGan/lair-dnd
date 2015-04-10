@@ -19,7 +19,7 @@ end
 
 
 100.times do
-  Listing.create(owner_id: rand(User.count),
+  l = Listing.create(owner_id: rand(User.count),
                  title: Faker::Lorem.words(4, true).join(' '),
                  accomodates: rand(5),
                  price: rand(20..500),
@@ -31,12 +31,25 @@ end
                  beds: rand(2..5),
                  bathrooms: rand(2..5),
                  housing_type: Listing::TYPES.sample,
-                 internet: true,
-                 kitchen: true,
-                 tv: true,
                  checkin: Time.at(rand(3.hours.ago..Time.now)),
                  checkout: Time.now + rand(60 * 60 * 3)
                  )
+  Amenity.create(
+    listing_id: l.id,
+    internet: true,
+    kitchen: true,
+    tv: true,
+    dungeon: (rand(3) < 1) ? true : false,
+    moat: (rand(3) < 1) ? true : false,
+    secret_passages: (rand(3) < 1) ? true : false,
+    random_monsters: (rand(3) < 1) ? true : false,
+    endless_dungeons: (rand(3) < 1) ? true : false,
+    dragons: (rand(3) < 1) ? true : false,
+    maze: (rand(3) < 1) ? true : false,
+    treasure: (rand(3) < 1) ? true : false,
+    high_tower_room: (rand(3) < 1) ? true : false,
+    grand_library: (rand(3) < 1) ? true : false
+  )
 
 end
 

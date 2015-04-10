@@ -19,9 +19,6 @@
 #  bedrooms             :integer
 #  beds                 :integer
 #  bathrooms            :integer
-#  internet             :boolean
-#  kitchen              :boolean
-#  tv                   :boolean
 #  checkin              :time
 #  checkout             :time
 #
