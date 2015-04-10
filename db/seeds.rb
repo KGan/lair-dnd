@@ -17,6 +17,7 @@ User.create(username: 'Keving', email: 'Keving', password: 'password')
               password: Faker::Internet.password(7,15))
 end
 
+
 100.times do
   Listing.create(owner_id: rand(User.count),
                  title: Faker::Lorem.words(4, true).join(' '),
@@ -25,7 +26,16 @@ end
                  description: Faker::Lorem.paragraphs.join("\n"),
                  rules: Faker::Lorem.paragraphs.join("\n"),
                  availability_default: 1,
-                 minimum_stay: rand(1..5)
+                 minimum_stay: rand(1..5),
+                 bedrooms: rand(1..5),
+                 beds: rand(2..5),
+                 bathrooms: rand(2..5),
+                 housing_type: Listing::TYPES.sample,
+                 internet: true,
+                 kitchen: true,
+                 tv: true,
+                 checkin: Time.at(rand(3.hours.ago..Time.now)),
+                 checkout: Time.now + rand(60 * 60 * 3)
                  )
 
 end
@@ -47,4 +57,10 @@ Listing.all.each do |listing|
     randphoto = listing.photos[rand(listing.photos.length)]
     randphoto.main = true if randphoto
   end
+end
+
+
+User.all.each do |user|
+  photos = Photo.where(user_id: user.id)
+  user.profile_photo_id = photos[rand(photos.count)].id if photos.count > 0
 end

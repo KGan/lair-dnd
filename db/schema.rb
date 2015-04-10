@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409223518) do
+ActiveRecord::Schema.define(version: 20150410001446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20150409223518) do
     t.datetime "updated_at",           null: false
     t.integer  "minimum_stay"
     t.boolean  "availability_default"
+    t.string   "housing_type"
+    t.integer  "bedrooms"
+    t.integer  "beds"
+    t.integer  "bathrooms"
+    t.boolean  "internet"
+    t.boolean  "kitchen"
+    t.boolean  "tv"
+    t.time     "checkin"
+    t.time     "checkout"
   end
 
   add_index "listings", ["currency_id"], name: "index_listings_on_currency_id", using: :btree
@@ -105,8 +114,9 @@ ActiveRecord::Schema.define(version: 20150409223518) do
     t.string   "email"
     t.string   "password_digest"
     t.boolean  "guest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "profile_photo_id"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", using: :btree

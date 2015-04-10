@@ -1,7 +1,7 @@
 LairDnD.Routers.LandingRouter = Backbone.Router.extend({
   routes: {
     '': 'default',
-    'listing/new': 'newListing',
+    'new-listing': 'newListing',
     'search': 'searchListing',
   },
   initialize: function(options) {
@@ -15,7 +15,7 @@ LairDnD.Routers.LandingRouter = Backbone.Router.extend({
 
   default: function() {
     var path = window.location.pathname;
-    if (path.slice(0, path.indexOf('?')).length < 2) {
+    if (path.slice(0, path.indexOf('?')).length <= 2) {
       this.landing();
     } else {
       var listshowreg = path.match(/\/listings\/(\d+)/);

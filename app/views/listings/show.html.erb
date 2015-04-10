@@ -11,12 +11,58 @@
     </div>
   </div>
 </div>
-<div id='listing-basic'>
+<div class='listing-section media col-md-8 col-md-offset-2' id='listing-basic'>
+  <div class="media-left">
+    <a href="javascript:void(0)">
+      <img class='media-object media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
+    </a>
+  </div>
+  <div class='media-body'>
+    <div class="col-md-8">
+      <div class="media-heading h3">
+        <%= @listing.title %><br>
+        <%= @listing.location_alias.try(:name) %>
+        --todo:star ratings--
+      </div>
+      <div class="col-md-3">
+        <i class='icon large home'></i>
+        <%= @listinghousing_type %>
+      </div>
+      <div class="col-md-3">
+        <i class='icon large users'></i>
+        <%= @listing.accomodates %> Guests
+      </div>
+      <div class="col-md-3">
+        <%= @listing.bedrooms %> Bedrooms
+      </div>
+      <div class="col-md-3">
+        <i class='fa fa-hotel fa-2x'></i>
+        <%= @listing.beds %> Beds
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div id='listing-amenities'>
-</div>
+<div class='col-md-8 col-md-offset-2'>
+  <div class='listing-section media col-md-8' id='listing-amenities'>
+    <% @listing.amenities.each do |amenity| %>
+      <%= amenity if @listing.instance_variable_get("@#{amenity}") %>
+    <% end %>
 
-<div id='listing-map'>
+    Check In: <%= @listing.checkin.strftime('%I:%M%p') %>
+    Check Out: <%= @listing.checkout.strftime('%I:%M%p') %>
+  </div>
+
+  <div class='listing-section media col-md-8' id='listing-description'>
+    <%= @listing.description %>
+  </div>
+
+  <div class='listing-section media col-md-8' id='listing-rules'>
+    <%= @listing.rules %>
+  </div>
+
+  <div id='listing-map'>
+  </div>
 </div>
 </div>

@@ -15,6 +15,15 @@
 #  updated_at           :datetime         not null
 #  minimum_stay         :integer
 #  availability_default :boolean
+#  housing_type         :string
+#  bedrooms             :integer
+#  beds                 :integer
+#  bathrooms            :integer
+#  internet             :boolean
+#  kitchen              :boolean
+#  tv                   :boolean
+#  checkin              :time
+#  checkout             :time
 #
 
 require 'test_helper'
