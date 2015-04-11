@@ -1,8 +1,23 @@
 video.banner-video {
-  top:50px;
+  top:-70px;
   left:0;
   z-index: -1;
-  position: absolute;
-  height: 520px;
-  transform: scaleX(2.5) translateX(250px);
+  position: relative;
+  overflow: hidden;
+}
+
+nav.navbar.navbar-default {
+  background-color:transparent;
+  color: #fff;
+  border: none;
+  div:not(.modal-content) {
+    background-color:inherit;
+    color:inherit;
+  }
+  div.modal-content {
+    width: 300px;
+    margin:auto;
+    color: #000;
+  }
+
 }

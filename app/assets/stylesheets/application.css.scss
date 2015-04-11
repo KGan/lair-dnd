@@ -20,6 +20,14 @@
 @import "bootstrap";
 @import "semantic-ui";
 
+@import url(http://fonts.googleapis.com/css?family=Nunito:400,300,700);
+
+
+html body {
+  font-family: 'Nunito', sans-serif;
+}
+
+
 //reset
 
 // /* PHASE 0: Reset */
@@ -34,7 +42,7 @@ span, article, footer, time, small {
 //   border: 0;
 //   outline: 0;
   font: inherit;
-  // color: inherit;
+  color: inherit;
   text-align: inherit;
   text-decoration: inherit;
   vertical-align: inherit;

@@ -52,6 +52,8 @@ group :development, :test do
   gem 'byebug'
   gem 'faker'
 
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem "rack-livereload"
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'

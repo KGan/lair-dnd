@@ -67,7 +67,8 @@ LairDnD.Routers.LandingRouter = Backbone.Router.extend({
       this.views[select].remove();
     }
     this.views[select] = view;
-    this.contents[select].html(view.render().$el);
+    this.contents[select].html(view.$el);
+    view.render();
   },
 
   _hideModals: function() {
