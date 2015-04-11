@@ -8,4 +8,18 @@ class ListingsController < ApplicationController
       end
     end
   end
+
+  def index
+    @listings = Listing.all.first(20) if (@listings = search)
+    render :index
+  end
+
+  private
+    def search
+      Listing.search(search_params)
+    end
+
+    def search_params
+      params.require(:search).permit(:offset, :location)
+    end
 end

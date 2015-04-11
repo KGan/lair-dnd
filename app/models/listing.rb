@@ -32,6 +32,7 @@ class Listing < ActiveRecord::Base
   has_many :photos, dependent: :destroy
   has_one :location_mapping, dependent: :destroy
   has_one :location_alias, through: :location_mapping
+  acts_as_mappable through: {location_alias: :location}
   def is_owner?(u)
     !!(u.id == self.owner_id)
   end
@@ -42,4 +43,22 @@ class Listing < ActiveRecord::Base
     a ? a : self.photos.first
   end
 
+  def self.search(query)
+    # self.includes(location_alias: :location, :amenity, :photos, :user).
+    #      where(location_alias: {location: })
+    range = query.range || 10
+    offset = query.offset || 0
+    loc = query.location
+    if found_la = LocationAlias.find_by_name(loc)
+      fll = found_la.location
+      origin = [fll.latitude, fll.longitude]
+    else
+      origin = loc
+    end
+
+    self.includes(location_alias: :location, :user, :photos).
+        geo_scope(within: range, origin: origin).offset(offset).limit(10)
+
+    
+  end
 end

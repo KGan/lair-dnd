@@ -1,4 +1,5 @@
 LairDnD.Views.MainView = Backbone.CompositeView.extend({
+  searchUrl: '/api/listings',
   events: {
     'click button.search': 'search'
   },
@@ -7,9 +8,8 @@ LairDnD.Views.MainView = Backbone.CompositeView.extend({
   },
   search: function(e) {
     var $form = $(e.currentTarget).closest('form');
-    var data = $form.find(':input').serializeJSON();
-    $.ajax({
-      
-    })
+    $form.attr('action', '/listings');
+    $form.attr('method', 'get');
+    $form.submit();
   }
 });

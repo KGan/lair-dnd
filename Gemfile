@@ -18,6 +18,7 @@ gem 'sprockets-rails'
 gem 'font-awesome-rails'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
 gem 'jquery-ui-rails'
+gem 'geokit-rails'
 
 gem 'backbone-on-rails'
 gem 'ejs'
@@ -51,6 +52,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'faker'
+  gem 'pry-rails'
 
   gem 'guard-livereload', '~> 2.4', require: false
   gem "rack-livereload"

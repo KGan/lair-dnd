@@ -13,4 +13,6 @@
 class Location < ActiveRecord::Base
   has_many :location_aliases
   validates_presence_of :longitude, :latitude, :size
+  acts_as_mappable :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
 end

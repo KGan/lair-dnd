@@ -7,16 +7,16 @@
   <form class='form-field'>
     <div class='col-md-7 full-search-form search-form'>
       <div class="form-group col-md-4">
-        <input name="location" placeholder="Where are you staying?" value="">
+        <input name="search[location]" placeholder="Where are you staying?" value="">
       </div>
       <div class="form-group col-md-2">
-        <input name='checkin' class="datepicker " id="checkin" placeholder="Check In">
+        <input name='search[checkin]' class="datepicker " id="checkin" placeholder="Check In">
       </div>
       <div class="form-group col-md-2">
-        <input name='checkout' class="datepicker " id="checkout" placeholder="Check Out">
+        <input name='search[checkout]' class="datepicker " id="checkout" placeholder="Check Out">
       </div>
       <div class='form-group col-md-2'>
-          <select name='guests' class='form-control' id='guests'>
+          <select name='search[guests]' class='form-control' id='guests'>
             <% for(var i = 1; i < 15; i++) { %>
               <option value='<%= i %>'>
                 <%= i %> Guest<% if (i > 1) { %>s<% } %>

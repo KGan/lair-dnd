@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new]
   resources :sessions, only: [:create, :destroy]
-  resources :listings, only: [:show]
+  resources :listings, only: [:show, :index]
 
   namespace :api, defaults: { format: :json } do
-    resources :listings
+    resources :listings, except: [:index]
     resources :users, only: [:show, :create, :destroy]
     resources :sessions, only: [:create, :destroy]
     get 'attrs/:modelname', to: 'attributes#attribute_list'

@@ -1,9 +1,5 @@
 class Api::ListingsController < Api::ApiController
-  skip_before_action :require_login!, only:[:index, :show]
-  def index
-    @listings = Listing.all.first(20) if (@listings = search)
-    render :index
-  end
+  skip_before_action :require_login!, only:[ :show]
 
   def create
     @listing = current_user.listings.create(parse_listings)
@@ -34,12 +30,6 @@ class Api::ListingsController < Api::ApiController
 
 
   private
-    def search
-    end
-
-    def search_params
-      params.require(:search).permit(:offset)
-    end
 
     def listing_params
       params.require(:listing).

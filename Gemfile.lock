@@ -112,6 +112,11 @@ GEM
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    geokit (1.9.0)
+      multi_json (>= 1.3.2)
+    geokit-rails (2.1.0)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     guard (2.12.5)
@@ -198,6 +203,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     rack (1.6.0)
     rack-livereload (0.3.15)
       rack
@@ -291,6 +298,7 @@ DEPENDENCIES
   ejs
   faker
   font-awesome-rails
+  geokit-rails
   guard-livereload (~> 2.4)
   jbuilder (~> 2.0)
   jquery-rails
@@ -300,6 +308,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pg
+  pry-rails
   rack-livereload
   rails (= 4.2.0)
   sass-rails (~> 5.0)
