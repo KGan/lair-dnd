@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3973691997">
+    <data-source source="LOCAL" name="Rails lairdnd: development" uuid="015a8da7-876b-49f0-9a41-f38d3de9e64d">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:lairdnd-dev</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails lairdnd: test" uuid="3de4fb87-22de-488d-884d-bdbbc0289595">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:lairdnd-test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails lairdnd: production" uuid="0cdfecf1-adce-4b2d-87e3-34486f9febc3">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:lairdnd_production</jdbc-url>
+      <user-name>lairdnd</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff9dfebdfe7dffadfe6dfefdf87dffadff8dfe5dfe0dfefdfe9dffedf87dffadff8dfe5dffadfe5dff9dfebdfe6dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

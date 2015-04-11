@@ -51,7 +51,7 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   },
 
   scrollOrStick: function(e) {
-    if($(window).scrollTop() > this.bookstick - 40) {
+    if($(window).scrollTop() > this.bookstick - 30) {
       this.$bookingForm.addClass('affixed');
     } else {
       this.$bookingForm.removeClass('affixed');

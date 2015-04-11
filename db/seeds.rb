@@ -10,7 +10,9 @@ User.create(username: 'Keving', email: 'Keving', password: 'password')
               password: Faker::Internet.password(7,15))
 end
 
-
+['San Francisco', 'New York', 'Paris', 'Tokyo', 'Cancun', 'Rome'].each do |guaranteed_seed|
+  Geokit::Geocoders::Google
+end
 
 100.times do
   l = Listing.create(owner_id: rand(User.count),

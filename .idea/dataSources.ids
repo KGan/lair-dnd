@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails lairdnd: development" uuid="015a8da7-876b-49f0-9a41-f38d3de9e64d">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails lairdnd: test" uuid="3de4fb87-22de-488d-884d-bdbbc0289595">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails lairdnd: production" uuid="0cdfecf1-adce-4b2d-87e3-34486f9febc3">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

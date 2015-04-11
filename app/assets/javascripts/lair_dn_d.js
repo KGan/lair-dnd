@@ -7,7 +7,7 @@ window.LairDnD = {
   initialize: function() {
     new LairDnD.Routers.LandingRouter({
       $rootEl: $('#bb-content'),
-      $navbar: $('#navbar'),
+      $navbar: $('nav.navbar'),
       $flashes: $('#flashes')
     });
     Backbone.history.start();
@@ -15,6 +15,7 @@ window.LairDnD = {
 };
 
 $(document).ready(function(){
+  
   LairDnD.initialize();
 
   filepicker.setKey("Am4pdKMVZS3i6kwFiJnYgz");

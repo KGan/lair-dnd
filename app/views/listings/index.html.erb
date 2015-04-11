@@ -1,0 +1,5 @@
+<% @listings.each do |listing| %>
+    <div class='listing-card'>
+        <%= render 'listings/card', listing: listing %>
+    </div>
+<% end %>

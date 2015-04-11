@@ -12,10 +12,11 @@ LairDnD.Views.Navbar = Backbone.View.extend({
     event.preventDefault();
     var $form = $(event.currentTarget);
     var action = $form.data('action');
+    var m; 
     if (action === 'login') {
-      var m = new LairDnD.Models.Session();
+      m = new LairDnD.Models.Session();
     } else {
-      var m = new LairDnD.Models.User();
+      m = new LairDnD.Models.User();
     }
     m.set($form.serializeJSON().user);
     m.save({}, {
@@ -28,9 +29,9 @@ LairDnD.Views.Navbar = Backbone.View.extend({
         });
         $form.siblings('.flashes').html(content);
       }.bind(this)
-    })
+    });
   },
   newListing: function(event){
-    Backbone.history.navigate('listing/new', {trigger: true});
+    Backbone.history.navigate('new-listing', {trigger: true});
   }
-})
+});

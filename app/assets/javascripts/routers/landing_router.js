@@ -30,6 +30,7 @@ LairDnD.Routers.LandingRouter = Backbone.Router.extend({
   },
 
   landing: function() {
+    this.views.navbar.$el.addClass('landing');
     var landingView = new LairDnD.Views.Landing();
     this._swapView('$rootEl', landingView);
   },

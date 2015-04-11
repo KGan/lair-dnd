@@ -1,5 +1,7 @@
 LairDnD.Views.Landing = Backbone.CompositeView.extend({
   template: JST['landing'],
+  events: {
+  },
 
   initialize: function(options) {
     this.renderSearch();
@@ -10,17 +12,19 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend({
   render: function() {
     var content = this.template();
     this.$el.html(content);
-    this.stretchBannerVideo();
+    this.$('video.banner-video').on('loadedmetadata', this.stretchBannerVideo.bind(this));
     return this;
   },
-  stretchBannerVideo: function() {
-    var width = this.$('video.banner-video').width();
-    var windowWidth = $(window).width();
+  stretchBannerVideo: function(e) {
+      this.$bannerVideo = $(e.currentTarget);
+      var heightRatio = 550  / this.$bannerVideo.prop('videoHeight');
+      var width = this.$bannerVideo.prop('videoWidth');
+      var windowWidth = $(window).width();
+      var widthRatio = windowWidth / width;
 
-    this.$('video.banner-video').css({
-      'height'   : '550px',
-      'transform': 'scaleX('+ windowWidth/width + ')'
-    });
-
+      this.$('video.banner-video').css({
+        'height'   : '550',
+        'transform': 'scaleX('+ widthRatio + ')'
+      });
   }
 });
