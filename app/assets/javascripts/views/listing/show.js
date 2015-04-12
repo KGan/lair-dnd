@@ -27,27 +27,8 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   setupBooking: function() {
     this.$bookingForm = $('.booking-form');
     this.bookstick = this.$bookingForm.offset().top;
-    this.setupDatepicker();
+    LairDnD.Views.MainView.prototype.setupDatepicker($('#checkin'), $('#checkout'));
     $(window).on('scroll.stick', this.scrollOrStick.bind(this));
-  },
-
-  setupDatepicker: function(){
-    $( "#checkin" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#checkout" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#checkout" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#checkin" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
   },
 
   scrollOrStick: function(e) {

@@ -3,8 +3,8 @@
 # Table name: locations
 #
 #  id         :integer          not null, primary key
-#  longitude  :integer
-#  latitude   :integer
+#  longitude  :decimal(, )
+#  latitude   :decimal(, )
 #  size       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

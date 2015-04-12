@@ -1,12 +1,18 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="">
-      <ul class="nav nav-tabs navbar-left">
+    <div class="homeBrand">
+      <ul class="nav navbar-nav navbar-left">
         <li role="presentation"><%= link_to 'Home', root_url %></li>
       </ul>
     </div>
+    <div id='navSearch'>
+      <form class="navbar-form pull-left search-form">
+        <i class='icon icon-search icon-grey h4'></i>
+        <input type="text" name='search[location]' class="span2" placeholder='Where are you going?'>
+      </form>
+    </div>
     <ul class='nav navbar-right nav-pills'>
-      <li class='new-space'><a href='javascript:void(0)'>List Your Space</a></li>
+      <li class='new-space h6'><a href='javascript:void(0)'>List Your Space</a></li>
     </ul>
       <% if signed_in? %>
         <div class="nav navbar-right">
@@ -22,7 +28,7 @@
           </div>
         </div>
       <% else %>
-        <ul class="nav nav-tabs navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           <li role="presentation" >
             <a href='javascript:void(0)' data-toggle="modal" data-target="#login-modal">Login</a>
           </li>

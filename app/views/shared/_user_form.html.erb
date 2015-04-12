@@ -1,4 +1,4 @@
-<form action="<%= url %>" method="POST" data-action="<%= is_login ? 'login' : 'signup' %>">
+<form action="<%= url %>" method="POST" class='loginlogout' data-action="<%= is_login ? 'login' : 'signup' %>">
   <%= csrf_inject %>
   <div class="form-group">
     <div class="input-group">
@@ -20,6 +20,6 @@
 </form>
 
 <% if modal %>
-  <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+  <button class='guest-login btn form-control'>Guest Login</button>
   </div>
 <% end %>

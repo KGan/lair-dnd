@@ -80,8 +80,8 @@
           <% amenity_slice.each do |amenity| %>
             <% provided = @amenities.send(amenity) ? 'provided' : 'unprovided' %>
             <div class='cate-item col-md-12'>
-              <i class='<%= icon[amenity] ? icon[amenity] : icon['default'] %> <%= provided %>'></i>
-              <span class='<%= provided %>'><%= amenity.gsub('_', ' ') %></span>
+              <i class='<%= icon[amenity] ? icon[amenity] : icon['default'] %> <%= provided %> col-md-3'></i>
+              <span class='<%= provided %> col-md-9'><%= amenity.gsub('_', ' ') %></span>
             </div>
           <% end %>
         </div>
@@ -118,3 +118,14 @@
 </div>
 
 </div>
+
+<script type='text/javascript'>
+  $(function(){
+    new LairDnD.Routers.ShowRouter({
+      $rootEl: $('#bb-content'),
+      $navbar: $('nav.navbar'),
+      listing_id: <%=@listing.id%>
+    });
+    Backbone.history.start();
+  });
+</script>

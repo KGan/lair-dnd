@@ -1,5 +1,28 @@
-<% @listings.each do |listing| %>
-    <div class='listing-card'>
-        <%= render 'listings/card', listing: listing %>
+<div class='col-md-7 leftpane'>
+
+  <form class='form-detail'>
+    <div class='detail-full-search search-form'>
+
     </div>
-<% end %>
+  </form>
+
+  <div class='search-results'>
+
+  </div>
+</div>
+
+<div class='col-md-5 rightpane'>
+  <div id="google-map">
+
+  </div>
+</div>
+<script type='text/javascript'>
+  $(function(){
+    new LairDnD.Routers.ListingRouter({
+      $rootEl: $('#bb-content'),
+      $navbar: $('nav.navbar'),
+      $google: $('#google-map')
+    });
+    Backbone.history.start();
+  });
+</script>

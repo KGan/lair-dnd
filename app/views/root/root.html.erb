@@ -1,1 +1,12 @@
 <div id='bb-content'></div>
+
+<script type='text/javascript'>
+  $(function(){
+    new LairDnD.Routers.LandingRouter({
+      $rootEl: $('#bb-content'),
+      $navbar: $('nav.navbar'),
+      $flashes: $('#flashes')
+    });
+    Backbone.history.start();
+  });
+</script>

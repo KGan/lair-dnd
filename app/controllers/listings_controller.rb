@@ -10,7 +10,6 @@ class ListingsController < ApplicationController
   end
 
   def index
-    @listings = Listing.all.first(20) if (@listings = search)
     render :index
   end
 

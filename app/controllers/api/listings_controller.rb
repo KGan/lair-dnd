@@ -10,6 +10,11 @@ class Api::ListingsController < Api::ApiController
     end
   end
 
+  def index
+      @listings = Listing.all.first(20)
+      render :index
+  end
+
   def update
     @listing = Listing.find(params[:id])
     if @listing.update(parse_listings)
@@ -47,5 +52,13 @@ class Api::ListingsController < Api::ApiController
       end
 
       listing_params
+    end
+
+    def search
+      Listing.search(search_params)
+    end
+
+    def search_params
+      params.require(:search).permit(:offset, :location)
     end
 end

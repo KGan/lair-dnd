@@ -54,6 +54,9 @@ a.primary_image > img {
       text-decoration: line-through;
     }
   }
+  & .col-md-* {
+    padding-right:0px;
+  }
   overflow: hidden;
   margin-top: 20px;
 }

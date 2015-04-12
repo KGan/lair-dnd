@@ -16,10 +16,21 @@ div.nav div.dropdown:hover > ul.dropdown-menu {
     transition: height 1s;
 }
 
+#navSearch {
+  input {
+    padding: 5px;
 
+  }
+}
 
-nav .new-space a{
-  color:white
+nav {
+  .new-space{
+    color:white;
+    margin-top: 5px;
+    &:active {
+      background: teal;
+    }
+  }
 }
 
 .new-space {
@@ -40,10 +51,14 @@ nav li.new-space:hover > a {
   transform: translateX(-50%);
   .search-form {
     width: 100%;
+    padding:0;
     height: 50px;
+    .equipartition {
+      padding: 0;
+    }
     div.form-group{
-      width:15%;
-      height:100%;
+      font-size:14px;
+      height:51px;
       padding:0;
       margin:0;
       input {
@@ -58,7 +73,7 @@ nav li.new-space:hover > a {
         border:none;
         border-radius: 0px;
       }
-      
+
       select.form-control {
         border-radius: 0px;
         -webkit-appearance: none;
@@ -67,9 +82,6 @@ nav li.new-space:hover > a {
         padding: 15px 10px;
         height:100%;
       }
-    }
-    div.form-group:first-of-type {
-      width:40%;
     }
   }
 }

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_one(
     :profile_photo,
     class_name: :Photo,
-    primary_key: :photo_id,
+    primary_key: :profile_photo_id,
     foreign_key: :id
   )
   has_many :sessions
