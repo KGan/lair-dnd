@@ -13,12 +13,13 @@
  *= require_tree .
  *= require_self
  *= require jquery.ui.all
- *= require font-awesome
 
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "semantic-ui";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 @import url(http://fonts.googleapis.com/css?family=Nunito:400,300,700);
 

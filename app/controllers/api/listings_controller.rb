@@ -1,5 +1,5 @@
 class Api::ListingsController < Api::ApiController
-  skip_before_action :require_login!, only:[ :show]
+  skip_before_action :require_login!, only:[ :show, :index]
 
   def create
     @listing = current_user.listings.create(parse_listings)
@@ -11,8 +11,8 @@ class Api::ListingsController < Api::ApiController
   end
 
   def index
-      @listings = Listing.all.first(20)
-      render :index
+    @listings = Listing.all.first(20) unless (@listings = search)
+    render :index
   end
 
   def update
@@ -45,10 +45,9 @@ class Api::ListingsController < Api::ApiController
     end
 
     def parse_listings
-      fpfile_data = params.require(:listing).permit(:fpfiles)
+      fpfile_data = params.require(:listing).permit(:photos)
       if fpfile_data
-        #TODO
-        puts 'i have data'
+        #TODO handle uploaded files
       end
 
       listing_params
@@ -59,6 +58,6 @@ class Api::ListingsController < Api::ApiController
     end
 
     def search_params
-      params.require(:search).permit(:offset, :location)
+      params.permit(:search => [:location, :checkin, :checkout, :guests, :page])
     end
 end

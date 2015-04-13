@@ -10,7 +10,7 @@ class Api::AttributesController < ApplicationController
     def parse_columns(cols, modelname)
       filtered = cols - ['id', 'created_at', 'updated_at', 'password_digest']
       if modelname == 'listing'
-        filtered += ['photos']
+        filtered += ['photos', 'location']
       end
     end
 end

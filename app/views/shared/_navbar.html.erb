@@ -6,9 +6,9 @@
       </ul>
     </div>
     <div id='navSearch'>
-      <form class="navbar-form pull-left search-form">
+      <form action='<%=listings_url%>' action='get' class="navbar-form pull-left search-form">
         <i class='icon icon-search icon-grey h4'></i>
-        <input type="text" name='search[location]' class="span2" placeholder='Where are you going?'>
+        <input type="text" name='search[location]' class="span12" id='nv-search' placeholder='Where are you going?'>
       </form>
     </div>
     <ul class='nav navbar-right nav-pills'>

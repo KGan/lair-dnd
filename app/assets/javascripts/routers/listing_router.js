@@ -11,7 +11,7 @@ LairDnD.Routers.ShowRouter = LairDnD.Routers.BaseRouter.extend({
       model: this.model,
       $el: $('#listing-show')
     });
-    this._swapView('$rootEl', listingView);
+    listingView.render();
   },
 
 });
@@ -25,9 +25,14 @@ LairDnD.Routers.ListingRouter = LairDnD.Routers.BaseRouter.extend({
 
   after_init: function(options) {
     this.query_params = options.query_params;
+    this.views.mainView = new LairDnD.Views.SearchMain({
+      collection: this.collections.listings,
+      query_params: this.query_params
+    });
+    this._swapView('$rootEl', this.views.mainView);
   },
 
   searchListings: function() {
-    this.views.google_map;
+
   }
 });

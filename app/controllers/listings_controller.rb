@@ -13,12 +13,8 @@ class ListingsController < ApplicationController
     render :index
   end
 
-  private
-    def search
-      Listing.search(search_params)
-    end
+  def new
+  end
 
-    def search_params
-      params.require(:search).permit(:offset, :location)
-    end
+  private
 end

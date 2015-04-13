@@ -6,9 +6,36 @@ video.banner-video {
   overflow: hidden;
 }
 
+.welcome {
+  position:absolute;
+  top: 100px;
+  left:50%;
+  color: #fff;
+  transform: translateX(-50%);
+  .welcome_message {
+    font-size: 45px;
+  }
+  .tagline {
+    font-size: 20px;
+  }
+  .how-it-works {
+    margin-top: 20px;
+  }
+  button.about {
+    background: #aaa;
+    opacity: .7;
+    border-radius: 3px;
+  }
+  div, button {
+    margin-left: auto;
+    text-align: center;
+  }
+}
+
 nav.navbar.navbar-default.landing {
   background-color:transparent;
   color: #fff;
+
   border: none;
   div:not(.modal-content) {
     background-color:inherit;
@@ -19,5 +46,7 @@ nav.navbar.navbar-default.landing {
     margin:auto;
     color: #000;
   }
-
+  li > a {
+    color:inherit;
+  }
 }

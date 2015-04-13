@@ -15,7 +15,7 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'sprockets-rails'
 
 
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
 gem 'jquery-ui-rails'
 gem 'geokit-rails'

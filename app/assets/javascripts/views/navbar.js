@@ -11,6 +11,7 @@ LairDnD.Views.Navbar = Backbone.View.extend({
   isLanding: function() {
     this.navsearch = this.$('#navSearch');
     this.navsearch.detach();
+    this.$el.addClass('landing');
   },
   loginsignup: function(event) {
     event.preventDefault();
@@ -36,6 +37,6 @@ LairDnD.Views.Navbar = Backbone.View.extend({
     });
   },
   newListing: function(event){
-    Backbone.history.navigate('new-listing', {trigger: true});
+    window.location.path = '/listings/new';
   }
 });

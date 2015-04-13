@@ -1,0 +1,27 @@
+<div class='panel-image'>
+  <a class='listing-image' href='/listings/<%= listing.id %>'>
+    <img src="<%= listing.get('main_photo_url') %>"></img>
+  </a>
+  <div class='panel-overlay-bottom-left price'>
+    <span>
+      <i class='icon dollar small'></i>
+      <span class='h4'><%= listing.get('price') %></span>
+    </span>
+  </div>
+</div>
+<div class='listing-snippet listing-basic'>
+  <a class='col-md-10' href='/listings/<%= listing.id %>'>
+    <div class='title'>
+      <%= listing.get('title') %>
+    </div>
+    <div class='tagline text-muted h5'>
+      <%= listing.get('housing_type') %>
+      <%= listing.get('location_name') %>
+    </div>
+  </a>
+  <div class='profile-picture col-md-2'>
+    <a href='javascript:void(0)'>
+      <img class='media-object profile-photo media-round' src='<%= listing.get('user_photo_url') %>'>
+    </a>
+  </div>
+</div>

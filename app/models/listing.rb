@@ -24,6 +24,8 @@
 #
 
 class Listing < ActiveRecord::Base
+  include Geokit::Geocoders
+  PER_PAGE = 20
   TYPES = ['house', 'apartment', 'room', 'studio']
   belongs_to :user, class_name: 'User', primary_key: :id, foreign_key: :owner_id
   validates_presence_of :user, :title, :accomodates, :price, :description
@@ -43,19 +45,21 @@ class Listing < ActiveRecord::Base
     a ? a : self.photos.first
   end
 
-  def self.search(query)
-    range = query['range'] || 10
-    offset = query['offset'] || 0
-    loc = query['location']
-    if found_la = LocationAlias.find_by_name(loc)
-      fll = found_la.location
-      origin = [fll.latitude, fll.longitude]
+
+  def self.by_location(origin, range)
+    if origin
+      self.within(range, origin: origin)
     else
-      origin = loc
+      self
     end
+  end
 
-    self.within(range, origin: origin).offset(offset).limit(10)
-
-
+  def self.search(query)
+    scope = Listing.includes(:main_photo, user: :profile_photo)
+    range = query['range'] || 10
+    page = query['page'] || 1
+    loc = query['location']
+    scope = scope.by_location(loc, range)
+    scope.offset(( page - 1 ) * Listing::PER_PAGE).limit(Listing::PER_PAGE)
   end
 end

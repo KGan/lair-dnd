@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
     primary_key: :profile_photo_id,
     foreign_key: :id
   )
+  has_many :photos
   has_many :sessions
   has_many :listings, primary_key: :id, foreign_key: :owner_id
   validates_presence_of :email, :password_digest

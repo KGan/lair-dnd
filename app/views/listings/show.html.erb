@@ -16,30 +16,49 @@
 <div class='col-md-8 col-md-offset-2'>
   <div class=' media col-md-7' id='listing-basic'>
     <div class="media-left">
-      <a href="javascript:void(0)">
-        <img class='media-object media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
-      </a>
+      <div class="col-md-12">
+        <a href="javascript:void(0)">
+          <img class='media-object profile-photo media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
+        </a>
+      </div>
+      <div class="lister-name">
+        <span class='grey h5'><%= @listing.user.username || @listing.user.email %></span>
+      </div>
     </div>
     <div class='media-body'>
 
       <div class="media-heading h3">
-        <%= @listing.title %><br>
-        <%= @listing.location_alias.try(:name) %>
-        --todo:star ratings--
+        <div>
+          <%= @listing.title %><br>
+        </div>
+        <div class='address h5'>
+          <%= @listing.location_alias.try(:name) %>
+        </div>
+        <% #placeholder until reviews %>
+        <div class='stars h4'>
+          <% n = rand(1..5) %>
+          <% n.times do %>
+            <i class='icon large star'></i>
+          <% end %>
+          <% (5-n).times do %>
+            <i class='icon large empty star'></i>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-3">
-        <i class='icon large home'></i>
-        <%= @listinghousing_type %>
+        <i class='icon large home'></i><br>
+        <%= @listing.housing_type %>
       </div>
       <div class="col-md-3">
-        <i class='icon large users'></i>
+        <i class='icon large users'></i><br>
         <%= @listing.accomodates %> Guests
       </div>
       <div class="col-md-3">
+        <i class='icon trash large'></i><br>
         <%= @listing.bedrooms %> Bedrooms
       </div>
       <div class="col-md-3">
-        <i class='fa fa-hotel fa-2x'></i>
+        <i class='fa fa-bed fa-2x'></i><br>
         <%= @listing.beds %> Beds
       </div>
 
@@ -122,7 +141,7 @@
 <script type='text/javascript'>
   $(function(){
     new LairDnD.Routers.ShowRouter({
-      $rootEl: $('#bb-content'),
+      $rootEl: $('#listing-show'),
       $navbar: $('nav.navbar'),
       listing_id: <%=@listing.id%>
     });

@@ -1,3 +1,24 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+img.profile-photo.media-round {
+  width: 100px;
+  height: 100px;
+}
+
+.profile-picture {
+  img.profile-photo {
+    height: 70px;
+
+    width: 70px;
+    transform: translate(-30%, -50%);
+  }
+}
+
+.lister-name {
+  text-align:center;
+}
+.media-round {
+  border-radius: 50%;
+  border: 2px solid #fff
+}

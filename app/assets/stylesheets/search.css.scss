@@ -1,0 +1,52 @@
+.panel-image {
+  position: relative;
+  height: 20%;
+  a.listing-image>img {
+    height:100%;
+    width:100%;
+    z-index: -1;
+  }
+  .panel-overlay-bottom-left {
+    position:absolute;
+    padding: 5px 5px 5px 5px;
+    bottom: 15px;
+    left: 0;
+    background-color: rgba(38, 38, 38, .4);
+    i.icon.dollar {
+      padding:0;
+      margin:0;
+      width:9px;
+    }
+  }
+}
+
+.search-results {
+  
+  border-top: 1px solid #262726;
+  height: 100vh;
+  overflow-y: scroll;
+  position:relative;
+  .listing-card {
+    height: 40%;
+    margin-top: 20px;
+    .panel-image {
+      height: 80%;
+    }
+    .listing-snippet {
+      .tagline {
+        margin-top: 4px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+#results-page {
+  i.loading {
+    margin:auto;
+  }
+  height:100vh;
+  .rightpane {
+    height: 100%;
+    background: none;
+  }
+}

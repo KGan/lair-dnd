@@ -2,20 +2,31 @@ Session.destroy_all
 User.destroy_all
 Listing.destroy_all
 
-User.create(username: 'Keving', email: 'Keving', password: 'password')
+User.create!(username: 'Keving', email: 'Keving', password: 'password')
 
 10.times do
-  User.create(username: Faker::Internet.user_name,
+  User.create!(username: Faker::Internet.user_name,
               email: Faker::Internet.safe_email,
               password: Faker::Internet.password(7,15))
 end
 
-['San Francisco', 'New York', 'Paris', 'Tokyo', 'Cancun', 'Rome'].each do |guaranteed_seed|
-  Geokit::Geocoders::Google
+['San Francisco, CA, USA', 'San Jose, CA, USA', 'San Leandro, CA, USA', 'Oakland, CA, USA' , 'New York City, NY USA', 'Paris, France', 'Tokyo, Japan', 'Cancun, Mexico', 'Rome, Italy'].each do |guaranteed_seed|
+  deciphered = Geokit::Geocoders::MultiGeocoder.geocode(guaranteed_seed)
+  if deciphered.success
+    newloc = Location.create!(latitude: deciphered.lat, longitude: deciphered.lng, size: 10)
+    LocationAlias.create!(name: deciphered.full_address, location_id: newloc.id)
+  end
 end
 
 100.times do
-  l = Listing.create(owner_id: rand(User.count),
+  newloc = Location.create!(latitude: Faker::Address.latitude, longitude: Faker::Address.longitude, size:10)
+  fa = Faker::Address
+  fakeaddr = fa.street_address + ', ' + fa.city + ', ' + fa.country + ' ' + fa.zip_code
+  newloc.location_aliases.create!(name: fakeaddr)
+end
+
+100.times do
+  l = Listing.create!(owner_id: rand(1..User.count),
                  title: Faker::Lorem.words(4, true).join(' '),
                  accomodates: rand(5),
                  price: rand(20..500),
@@ -30,7 +41,7 @@ end
                  checkin: Time.at(rand(3.hours.ago..Time.now)),
                  checkout: Time.now + rand(60 * 60 * 3)
                  )
-  Amenity.create(
+  Amenity.create!(
     listing_id: l.id,
     internet: true,
     kitchen: true,
@@ -47,12 +58,15 @@ end
     grand_library: (rand(3) < 1) ? true : false
   )
 
+  LocationMapping.create!(listing_id: l.id, location_alias_id: rand(1..LocationAlias.count))
+
+
 end
 
-300.times do
+900.times do
   listing = Listing.find(rand(Listing.count) + 1)
   tail = Faker::Lorem.words(3, true).join(' ')
-  Photo.create(user_id: listing.owner_id,
+  Photo.create!(user_id: listing.owner_id,
                listing_id: listing.id,
                photo_url: "http://placehold.it/770x300&text=#{tail}",
                thumb_url: "http://placehold.it/170x100&text=#{tail}",
@@ -64,12 +78,11 @@ end
 Listing.all.each do |listing|
   if listing.photos
     randphoto = listing.photos[rand(listing.photos.length)]
-    randphoto.main = true if randphoto
+    randphoto.update(main: true) if randphoto
   end
 end
 
 
 User.all.each do |user|
-  photos = Photo.where(user_id: user.id)
-  user.profile_photo_id = photos[rand(photos.count)].id if photos.count > 0
+  user.update!(profile_photo_id: user.photos.sample.id)
 end
