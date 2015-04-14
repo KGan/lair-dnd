@@ -58,6 +58,6 @@ class Api::ListingsController < Api::ApiController
     end
 
     def search_params
-      params.permit(:search => [:location, :checkin, :checkout, :guests, :page])
+      params.permit(:search => [:location, :checkin, :checkout, :guests, :page, :range, coords: [:lat, :lng]])
     end
 end

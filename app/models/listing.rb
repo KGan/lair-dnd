@@ -46,8 +46,20 @@ class Listing < ActiveRecord::Base
   end
 
 
-  def self.by_location(origin, range)
-    if origin
+  def self.by_location(orig, range)
+    if orig
+      if found_loc = LocationAlias.find_by_name(orig)
+        origin = [found_loc.location.latitude, found_loc.location.longitude]
+      elsif orig.is_a?(String)
+        decoded = MultiGeocoder.geocode(origin)
+        if (decoded.success)
+          origin = [decoded.lat, decoded.lng]
+        else
+          return self
+        end
+      else
+        origin = orig
+      end
       self.within(range, origin: origin)
     else
       self
@@ -55,6 +67,7 @@ class Listing < ActiveRecord::Base
   end
 
   def self.search(query)
+    debugger
     scope = Listing.includes(:main_photo, user: :profile_photo)
     range = query['range'] || 10
     page = query['page'] || 1

@@ -27,7 +27,8 @@ LairDnD.Routers.BaseRouter = Backbone.Router.extend({
   _initViews: function(){
     //navbar and main(body) are fixed and nonchanging.
     this.views.navbar = new LairDnD.Views.Navbar({
-      $navbar: this.contents.$navbar
+      $navbar: this.contents.$navbar,
+      collection: this.collections.listings
     });
 
     this.views.main = new LairDnD.Views.MainView();

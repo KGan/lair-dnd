@@ -21,9 +21,8 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
     );
 
     this.fitmap();
-    this.bindSearchBox();
     this.searchMarker = new google.maps.Marker({
-      map: null,
+      map: this.map,
       anchorPoint: new google.maps.Point(0, -29)
     });
   },
@@ -38,23 +37,6 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
   addMarker: function(marker) {
     this.markers().push(marker);
   },
-
-  bindSearchBox: function(){
-    this.searchBox = new google.maps.places.SearchBox(this.places_control);
-    google.maps.event.addListener(this.searchBox, 'places_changed', this.search.bind(this));
-  },
-
-  search: function(){
-    debugger
-    var place = this.searchBox.getPlaces()[0];
-    if (place === undefined || !place.geometry) {
-      return;
-    }
-    if (place.geometry) {
-
-    }
-  },
-
   fitmap: function() {
     this.map.fitBounds(this.map_bounds);
   },

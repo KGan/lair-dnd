@@ -1,9 +1,9 @@
 <script type='text/javascript'>
   $(function(){
-    new LairDnD.Routers.ListingRouter({
+    LairDnD.current_router = new LairDnD.Routers.ListingRouter({
       $rootEl: $('#main-content'),
       $navbar: $('nav.navbar'),
-      query_params: <%= raw params[:search].to_json %>
+      query_params: <%= raw params[:search].to_json %>,
     });
     Backbone.history.start();
   });

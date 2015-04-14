@@ -7,11 +7,13 @@ LairDnD.Views.Navbar = Backbone.View.extend({
   },
   initialize: function(options) {
     this.$el = options.$navbar;
+    this.navsearch = this.$('#navSearch');
+    this.bindSearchBox(this.$('#nv-search'));
   },
   isLanding: function() {
-    this.navsearch = this.$('#navSearch');
-    this.navsearch.detach();
+    this.navsearch.remove();
     this.$el.addClass('landing');
+    this.bindSearchBox($('#search-input'));
   },
   loginsignup: function(event) {
     event.preventDefault();
@@ -38,5 +40,36 @@ LairDnD.Views.Navbar = Backbone.View.extend({
   },
   newListing: function(event){
     window.location.path = '/listings/new';
+  },
+  bindSearchBox: function($elem){
+    this.searchBox = new google.maps.places.SearchBox($elem.get(0));
+    google.maps.event.addListener(this.searchBox, 'places_changed', this.search.bind(this));
+  },
+  search: function() {
+    var place = this.searchBox.getPlaces()[0];
+    if (place === undefined || !place.geometry) {
+      return;
+    }
+
+    place = place.geometry.location;
+
+    if (LairDnD.current_router instanceof LairDnD.Routers.ListingRouter) {
+      this.collection.fetch({
+        data: {
+          search: {
+            location: [
+              place.lat(), place.lng()
+            ]
+          }
+        }
+      });
+    } else {
+      var $form = $('<form>');
+      $form.attr('action', '/listings');
+      $form.attr('method', 'get');
+      $('<input type="text" name="search[coords[lat]]" value=<%= place.lat() %>');
+      $('<input type="text" name="search[coords[lng]]" value=<%= place.lng() %>');
+      $form.submit();
+    }
   }
 });

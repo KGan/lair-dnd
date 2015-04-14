@@ -1,17 +1,10 @@
 LairDnD.Views.MainView = Backbone.CompositeView.extend({
   searchUrl: '/api/listings',
   events: {
-    'click button.search': 'search',
+    'submit .search-form': 'stopDefault'
   },
   initialize: function() {
     this.$el = $('body');
-  },
-  search: function(e) {
-    e.preventDefault();
-    var $form = $(e.currentTarget).closest('form');
-    $form.attr('action', '/listings');
-    $form.attr('method', 'get');
-    $form.submit();
   },
 
   setupDatepicker: function(startDate, endDate){
@@ -32,4 +25,8 @@ LairDnD.Views.MainView = Backbone.CompositeView.extend({
       }
     });
   },
+
+  stopDefault: function(e){
+    e.preventDefault();
+  }
 });
