@@ -17,12 +17,17 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
   },
 
   selectMarker: function(e, id) {
-    if (this._selectedId) {
+    if (this._selectedId && this.markers()[this._selectedId]) {
       this.markers()[this._selectedId].setAnimation(null);
     }
     this._selectedId = id;
-    this.markers()[this._selectedId].setAnimation(google.maps.Animation.BOUNCE);
-
+    var newbounce = this.markers()[this._selectedId];
+    if (newbounce) {
+    newbounce.setAnimation(google.maps.Animation.BOUNCE);
+      if (!this.map.getBounds().contains(newbounce.getPosition())) {
+        this.map.fitBounds(this.map.getBounds().extend(newbounce.getPosition()));
+      }
+    }
   },
 
   initMap: function() {
@@ -38,7 +43,6 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
     
     this.infowindow = new google.maps.InfoWindow();
 
-
     this.searchMarkerImage = {
       url: '/assets/paleblue_MarkerV.png',
       size: new google.maps.Size(20, 32),
@@ -50,11 +54,12 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
       type: 'poly'
     };
     this.searchedPos = new google.maps.LatLng(parseFloat(this.init_location[0]), parseFloat(this.init_location[1]));
-    //this.setSearchCenter(this.map, this.SearchMarkerImage, this.SearchMarkerShape, this.searchPos);
 
+
+      google.maps.event.addListener(this.map, 'idle', _.debounce(function() { this.$el.trigger('map-search', [this.map]); }.bind(this), 2000, true));
     setTimeout( function() {
       this.$el.trigger('move-to', [this.searchedPos]);
-    }.bind(this), 0);
+    }.bind(this), 200);
   },
 
   setSearchCenter: function() {
@@ -80,7 +85,7 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
       this.map.fitBounds(g_geo.viewport);
     } else {
       this.map.panTo(g_geo.location || g_geo);
-      this.map.setZoom(13);
+      this.map.setZoom(10);
     }
   },
 
@@ -106,6 +111,7 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
   },
 
   loaded: function(collection) {
+    this.resetMarkers();
     collection.each(function(listing){
       var pos = listing.get('location');
       var listing_pos = new google.maps.LatLng(parseFloat(pos[0]), parseFloat(pos[1]));

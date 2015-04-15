@@ -2,7 +2,8 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
   template: JST['search/main'],
   id: 'results-page',
   events: {
-    'selected-panel': 'selectMarker'
+    'selected-panel': 'selectMarker',
+    'map-search': 'mapSearch'
   },
   selectMarker: function(e, id) {
     this.rightpane.$el.trigger('select-marker', [id]);
@@ -19,7 +20,7 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
     this.leftpane = new LairDnD.Views.LeftPane({
       $el: $('.leftpane'),
       collection: this.collection
-    })
+    });
     this.addSubview('.leftpane', this.leftpane);
 
 
@@ -33,4 +34,19 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
 
     return this;
   },
+  mapSearch: function(e, map) {
+    var origin = map.getCenter();
+    var bounds = map.getBounds();
+    if (!origin || !bounds) return;
+    var ne = bounds.getNorthEast();
+    var range = google.maps.geometry.spherical.computeDistanceBetween(origin, ne) / 1609.34;
+    this.collection.fetch({
+      data: {
+        search: {
+          location: [origin.lat(), origin.lng()],
+          range: range,
+        }
+      }
+    });
+  }
 });

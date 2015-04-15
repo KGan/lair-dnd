@@ -61,6 +61,6 @@ class Api::ListingsController < Api::ApiController
     end
 
     def search_params
-      params.permit(:search => [:checkin, :checkout, :accomodates, :location => []])
+      params.permit(:search => [:range, :checkin, :checkout, :accomodates, :location => []])
     end
 end
