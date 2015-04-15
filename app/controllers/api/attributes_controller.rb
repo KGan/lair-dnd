@@ -1,16 +1,14 @@
 class Api::AttributesController < ApplicationController
   def attribute_list
     modelname = params[:modelname]
-    columns = modelname.classify.constantize.column_names
-    render json: {form_attrs: parse_columns(columns, modelname)}
+    if (modelname == 'listing')
+      render json: {form_attrs: modelname.classify.constantize.parsed_columns}
+    else
+      render status: 403
+    end
   end
 
 
   private
-    def parse_columns(cols, modelname)
-      filtered = cols - ['id', 'created_at', 'updated_at', 'password_digest']
-      if modelname == 'listing'
-        filtered += ['photos', 'location']
-      end
-    end
+
 end

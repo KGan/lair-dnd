@@ -12,3 +12,14 @@ LairDnD.FormHelpers = {
     }
   }
 };
+
+LairDnD.MapHelpers = {
+  poise: function(form) {
+      form.attr('action', '/listings');
+      form.attr('method', 'get');
+  },
+  extract: function(form, place) {
+      form.append($('<input type="hidden" name="search[location][]" value="' + place.lat() + '">'));
+      form.append($('<input type="hidden" name="search[location][]" value="' + place.lng() + '">'));
+  }
+};

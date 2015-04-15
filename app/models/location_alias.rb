@@ -15,4 +15,5 @@ class LocationAlias < ActiveRecord::Base
   belongs_to :area, class_name: :LocationAlias, primary_key: :id, foreign_key: :area_id
   belongs_to :location
   has_many :location_mappings
+  has_many :listings, through: :location_mappings
 end

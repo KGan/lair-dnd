@@ -1,21 +1,47 @@
-<form>
-  <% attributes.each(function( key ) { %>
-    <% if (key === 'id') return true; %>
-    <div class='input-group'>
+<form class='listing-fillout col-md-6 col-md-offset-2'>
+  <div class='listing-options col-md-6 pull-left'>
+    <% attributes.each(function( key ) { %>
+      <% if (key === 'id') return true; %>
+      <div class='input-group'>
+        <% if (key === 'photos') { %>
+          <label>Upload Photos</label>
+          <input type="file">
+        <% } else if (key === 'location') { %>
+          <label for='location'>Location</label>
+          <input class='form-control' type=text id='location'>
+        <% } else if (key === 'housing_type') { %>
+          <label for='housing_type'>Type</label>
+          <select name='housing_type' id='housing_type' class='form-control'>
+            <option value='house'>house</option>
+            <option value='apartment'>apartment</option>
+            <option value='room'>room</option>
+            <option value='studio'>studio</option>
+          </select>
+        <% } else if (key === 'description' || key === 'rules') { %>
+          <label for='<%= key %>'><%= key %></label>
+          <textarea name='<%= key %>' rows=12 cols=40 class='form-control' id='<%= key %>'></textarea>
+        <% } else if (key === 'accomodates' || key === 'bedrooms') { %>
+          <label for='<%= key %>'><%= key %></label>
+          <select class='form-control' name='<%= key %>' id='<%= key %>'>
+            <% for(i = 1; i < 17; i++) { %>
+              <option value='<%= i %>'><%= i%></option>
+            <% } %>
+          </select>
+        <% } else { %>
+          <label for='<%= key %>'><%= key %></label>
+          <input class='form-control' type=text name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
+        <% } %>
+      </div>
+    <% }); %>
+  </div>
+  <div class='amenities col-md-6 pull-right'>
+    <% amenities.each(function( key ) { %>
+      <div class='input-group col-md-6'>
+        <input type=checkbox name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
+        <label for='<%= key %>'><%= key %></label>
+      </div>
+    <% }); %>
+  </div>
 
-      <% if (key === 'photos') { %>
-        <input type="filepicker" data-fp-apikey="Am4pdKMVZS3i6kwFiJnYgz"
-          data-fp-text='Upload Photos'
-          data-fp-mimetypes="image/*"
-          data-fp-container="modal"
-          data-fp-multiple="true"
-          data-fp-services="COMPUTER,FACEBOOK,GOOGLE_DRIVE,GMAIL,INSTAGRAM,IMAGE_SEARCH,URL"
-          onchange="out='';for(var i=0;i<event.fpfiles.length;i++){out+=event.fpfiles[i].url;out+=' '};alert(out)">
-      <% } else { %>
-      <label for='<%= key %>'><%= key %></label>
-      <input class='form-control' type=text name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
-      <% } %>
-    </div>
-  <% }); %>
-  <button type="submit" class="btn btn-default form-control">Submit</button>
+  <button type="submit" class="btn btn-default">Submit</button>
 </form>

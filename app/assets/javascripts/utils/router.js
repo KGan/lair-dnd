@@ -20,7 +20,7 @@ LairDnD.Routers.BaseRouter = Backbone.Router.extend({
       model: new LairDnD.Models.Listing(),
       className: 'new-listing'
     });
-
+    this.views.navbar.$el.trigger('un-landing');
     this._swapView('$rootEl', nlView);
   },
 

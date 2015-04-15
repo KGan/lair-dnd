@@ -14,19 +14,19 @@ state of the art lairs and dungeons
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
 - [x] Create accounts
-- [ ] Guest Account
+- [x] Guest Account
 - [x] Create sessions (log in)
 - [x] Create Residence
 - [x] Post Residence Details
-- [ ] Mark Residence on Map
-- [ ] View Residences/Photos/etc
- - [ ] Photo and Photo Carousel
- - [ ] Basic info
- - [ ] details + amenities
+- [x] Mark Residence on Map
+- [x] View Residences/Photos/etc
+ - [x] Photo and Photo Carousel
+ - [x] Basic info
+ - [x] details + amenities
 - [ ] Leave Comments on places
 - [ ] Ratings/Reviews
 - [ ] Search for places by
- - [ ] location
+ - [x] location
  - [ ] price
  - [ ] review-restricted
  - [ ] accomodations

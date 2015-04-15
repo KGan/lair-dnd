@@ -3,6 +3,7 @@ User.destroy_all
 Listing.destroy_all
 
 User.create!(username: 'Keving', email: 'Keving', password: 'password')
+User.create!(username: 'Guest', email: 'Guest', password: 'password', guest: true)
 
 10.times do
   User.create!(username: Faker::Internet.user_name,
@@ -15,6 +16,12 @@ end
   if deciphered.success
     newloc = Location.create!(latitude: deciphered.lat, longitude: deciphered.lng, size: 10)
     LocationAlias.create!(name: deciphered.full_address, location_id: newloc.id)
+    30.times do
+      sleep 1
+      revarr = [ deciphered.lat + rand() * 7/69 - 7/138 , deciphered.lng + rand() * 7/69 - 7/138 ]
+      shiftloc = Location.create!(latitude: revarr.first, longitude: revarr.last, size: 10)
+      LocationAlias.create!(name: (Geokit::Geocoders::GoogleGeocoder.reverse_geocode revarr).full_address, location_id: shiftloc.id)
+    end
   end
 end
 
@@ -58,7 +65,7 @@ end
     grand_library: (rand(3) < 1) ? true : false
   )
 
-  LocationMapping.create!(listing_id: l.id, location_alias_id: rand(1..LocationAlias.count))
+  LocationMapping.create!(listing_id: l.id, location_alias_id: rand(1..270))
 
 
 end

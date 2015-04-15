@@ -1,6 +1,13 @@
 class Api::ListingsController < Api::ApiController
   skip_before_action :require_login!, only:[ :show, :index]
 
+  def new
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
+    @listing = Listing.new
+    @attributes = Listing.parsed_columns
+    render 'listings/new'
+  end
+
   def create
     @listing = current_user.listings.create(parse_listings)
     if @listing.save
@@ -37,15 +44,11 @@ class Api::ListingsController < Api::ApiController
   private
 
     def listing_params
-      params.require(:listing).
-             permit(:title, :tagline, :accomodates,
-                    :price, :currency_id, :description,
-                    :rules, :availability_default, :minimum_stay
-                   )
+      params.require(:listing).permit(*Listing.column_names.map(&:to_sym))
     end
 
     def parse_listings
-      fpfile_data = params.require(:listing).permit(:photos)
+      fpfile_data = params.require(:listing).permit(:photos => [])
       if fpfile_data
         #TODO handle uploaded files
       end
@@ -58,6 +61,6 @@ class Api::ListingsController < Api::ApiController
     end
 
     def search_params
-      params.permit(:search => [:location, :checkin, :checkout, :guests, :page, :range, coords: [:lat, :lng]])
+      params.permit(:search => [:checkin, :checkout, :accomodates, :location => []])
     end
 end

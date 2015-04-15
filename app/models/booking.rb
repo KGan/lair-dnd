@@ -13,4 +13,10 @@
 #
 
 class Booking < ActiveRecord::Base
+
+
+
+  def overlap?(other)
+    return (other.dtstart < self.dtend && self.dtstart < other.dtend)
+  end
 end

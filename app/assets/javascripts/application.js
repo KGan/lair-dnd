@@ -13,7 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require serializejson
-//= require jquery.ui.all
+//= require jquery-ui
+//= require jquery-fileupload
+//= require jquery.iframe-transport
+//= require jquery.cloudinary
 //= require bootstrap-sprockets
 //= require underscore
 //= require backbone

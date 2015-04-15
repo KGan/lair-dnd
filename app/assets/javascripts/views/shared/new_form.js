@@ -3,6 +3,9 @@ LairDnD.Views.NewForm = Backbone.View.extend({
   events: {
     'submit form': 'submit',
   },
+  initialize: function(options) {
+    this.stage = options.stage || 'basics';
+  },
   render: function() {
     if (!this.model.constructor._formAttrs_) {
       var cb = this.render.bind(this);
@@ -12,22 +15,21 @@ LairDnD.Views.NewForm = Backbone.View.extend({
 
     var content = this.template({
       model: this.model,
-      attributes: _(this.model.constructor._formAttrs_),
+      attributes: _(this.model.constructor._formAttrs_[this.stage]),
+      amenities: _(this.model.constructor._formAttrs_['amenities']),
       naming: this.className
     });
     this.$el.html(content);
-    filepicker.constructWidget(this.$('input[type="filepicker"]'));
+    this.bindPlugins();
     return this;
+  },
+
+  bindPlugins: function() {
+
   },
   submit: function(event) {
     event.preventDefault();
     var formData = $(event.currentTarget).serializeJSON();
-    if (this.collection.board) {
-      formData.board_id = this.collection.board.get('id');
-    }
-    if (this.collection.list){
-      formData.list_id = this.collection.list.get('id');
-    }
     this.model.save(formData, {
       success: function(model) {
         Backbone.history.navigate('', {trigger: true});

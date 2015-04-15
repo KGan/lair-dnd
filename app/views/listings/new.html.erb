@@ -1,0 +1,15 @@
+<form>
+  <% @attributes['basic'].each do |key|  %>
+    <% return true if key.to_sym == :id %>
+    <div class='input-group'>
+
+      <% if (key === 'photos') { %>
+        <input type="file" id='s3photos' >
+      <% } else { %>
+      <label for='<%= key %>'><%= key %></label>
+      <input class='form-control' type=text name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
+      <% } %>
+    </div>
+  <% }); %>
+  <button type="submit" class="btn btn-default form-control">Submit</button>
+</form>

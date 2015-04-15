@@ -55,24 +55,43 @@ class Listing < ActiveRecord::Base
         if (decoded.success)
           origin = [decoded.lat, decoded.lng]
         else
+          puts 'failed decode'
           return self
         end
       else
-        origin = orig
+        origin = orig.map(&:to_f)
       end
       self.within(range, origin: origin)
     else
+      puts 'no origin'
       self
     end
   end
 
+  def self.within(*args)
+    super(*args).includes(location_alias: :location).references(:location)
+  end
+
   def self.search(query)
-    debugger
-    scope = Listing.includes(:main_photo, user: :profile_photo)
+    query = query['search']
+    scope = Listing
     range = query['range'] || 10
     page = query['page'] || 1
     loc = query['location']
     scope = scope.by_location(loc, range)
     scope.offset(( page - 1 ) * Listing::PER_PAGE).limit(Listing::PER_PAGE)
+  end
+
+
+  def self.parsed_columns
+    basics = ['housing_type', 'accomodates', 'bedrooms', 'location', 'photos', 'description', 'rules']
+    filtered = {
+      basics: basics,
+      amenities: Amenity.column_names - ['id', 'created_at', 'updated_at'],
+      complete: self.column_names -
+          ['id', 'created_at', 'updated_at'] +
+          ['photos', 'location'],
+      rest: ['price', 'checkin', 'checkout', 'availability_default']
+    }
   end
 end
