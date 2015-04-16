@@ -4,8 +4,7 @@
       <% if (key === 'id') return true; %>
       <div class='input-group'>
         <% if (key === 'photos') { %>
-          <label>Upload Photos</label>
-          <input type="file">
+          <button class="filepick btn btn-info">Upload Photos</button> 
         <% } else if (key === 'location') { %>
           <label for='location'>Location</label>
           <input class='form-control' type=text id='location'>
@@ -37,7 +36,7 @@
   <div class='amenities col-md-6 pull-right'>
     <% amenities.each(function( key ) { %>
       <div class='input-group col-md-6'>
-        <input type=checkbox name='<%= key %>' value="<%= model.get('key') %>" id='<%= key %>'>
+        <input type=checkbox name='amenity[<%= key %>]' value="<%= model.get('key') %>" id='<%= key %>'>
         <label for='<%= key %>'><%= key %></label>
       </div>
     <% }); %>

@@ -6,7 +6,9 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       'click .new-space': 'newListing',
       'is-landing' : 'isLanding',
       'un-landing' : 'unLanding',
-      'click .guest-login': 'guestLogin'
+      'click .guest-login': 'guestLogin',
+      'require-login-modal': 'modalWithError',
+      'shown.bs.modal .modal': 'focusFirst'
     },
     initialize: function(options) {
       this.$el = options.$navbar;
@@ -24,6 +26,11 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       this.bindSearchBox();
     },
 
+    focusFirst: function(e) {
+      var $shownModal = $(e.currentTarget);
+      $shownModal.find('input.email').focus();
+    },
+
     loginsignup: function(event) {
       event.preventDefault();
       var $form = $(event.currentTarget);
@@ -34,38 +41,39 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       } else {
         m = new LairDnD.Models.User();
       }
-      m.set($form.serializeJSON().user);
-      m.save({}, {
+      this.bbLoginSignup(m, $form.serializeJSON().user);
+    },
+
+    bbLoginSignup: function(m, creds) {
+      this.$('.modal .flashes').html('<i class="icon notched circle loading"></i>');
+      m.save(creds, {
         success: function() {
           location.reload(true);
         },
         error: function(model, response) {
-          var content = this.error_template({
-            flash: _(response.responseJSON)
-          });
-          $form.siblings('.flashes').html(content);
+          this.showModalFlashes(response.responseJSON);
         }.bind(this)
       });
     },
+
+    modalWithError: function(e, err_message) {
+      $('#login-modal').modal('toggle');
+      this.showModalFlashes(err_message);
+    },
+
+    showModalFlashes: function(m) {
+      var content = this.error_template({ flash: _(m) });
+      this.$('.modal .flashes').html(content);
+    },
+
     guestLogin: function(e){
       e.preventDefault();
       var guestUser = {email: 'Guest', password: 'password'};
       m = new LairDnD.Models.Session();
-      m.save(guestUser, {
-        success: function() {
-          location.reload(true);
-        },
-        error: function( model, response ) {
-          var content = this.error_template({
-            flash: _(response.responseJSON)
-          });
-         $('.flashes').html(content);
-        }
-      });
+      this.bbLoginSignup(m, guestUser);
     },
     newListing: function(event){
       Backbone.history.navigate('/new-listing', true);
-      // window.location.pathname = '/listings/new';
     },
     bindSearchBox: function(){
       this.searchBox = new google.maps.places.SearchBox(this.$('#nv-search').get(0));

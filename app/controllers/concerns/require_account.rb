@@ -6,6 +6,6 @@ module RequireAccount
   end
 
   def require_login!
-    redirect_to new_session_url unless signed_in?
+    render json: {errors: 'login required'}, status: 403 and return unless signed_in?
   end
 end

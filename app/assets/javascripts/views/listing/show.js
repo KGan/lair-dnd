@@ -7,8 +7,12 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   initialize: function(options){
     this.$el = options.$el;
     this.listenTo(this.model, 'sync', this.render);
-    this.setupBooking();
+    this.setup();
     this.carousel_id = 0;
+  },
+  setup: function() {
+    this.setupBooking();
+    this.setupStickies();
   },
   events: {
     'click .thumbnail.selector': 'selectPhoto',
@@ -28,16 +32,17 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
     this.$bookingForm = $('.booking-form');
     this.bookstick = this.$bookingForm.offset().top;
     LairDnD.Views.MainView.prototype.setupDatepicker($('#checkin'), $('#checkout'));
-    $(window).on('scroll.stick', this.scrollOrStick.bind(this));
+  },
+  setupStickies: function() {
+   $('body').scrollspy({target: '#sections-nav'});
+   this.$('.sticky').affix({
+     offset: {
+       top: this.$('.booking-form').offset().top - 42
+     }
+   });
   },
 
-  scrollOrStick: function(e) {
-    if($(window).scrollTop() > this.bookstick - 30) {
-      this.$bookingForm.addClass('affixed');
-    } else {
-      this.$bookingForm.removeClass('affixed');
-    }
-  },
+  
 
   render: function(){
     this.renderModal();

@@ -9,9 +9,15 @@
   </div>
 </div>
 
+<div class="subnav navbar navbar-inverse sticky" id='sections-nav'>
+  <ul role='tablist' class='col-md-8 col-md-offset-2 nav navbar-nav navbar-left'>
+    <% %w(basic details amenities description rules photos).each do |section| %>
+      <li role='presentation'><a href='#listing-<%=section%>'><%= section.capitalize %></a></li>
+    <% end %>
+  </ul>
+</div>
 
-
-<div class='col-md-8 col-md-offset-2'>
+<div class='col-md-8 col-md-offset-2' id='all-sections'>
   <div class=' media col-md-7' id='listing-basic'>
     <div class="media-left">
       <div class="col-md-12">
@@ -64,7 +70,7 @@
   </div>
 
   <div class='form-v col-md-5 pull-right'>
-    <div class="booking-form">
+    <div class="booking-form sticky">
         <%= render 'shared/booking_form', listing: @listing %>
     </div>
   </div>
@@ -143,7 +149,7 @@
 
 
 
-<div class='mappy' id='listing-map'>
+<div class='google-map' id='listing-map'>
 </div>
 
 </div>

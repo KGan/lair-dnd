@@ -16,7 +16,7 @@ module Api
 
     private
       def photo_params
-        params.permit(:photo_url)
+        params.permit(:photo_url, :thumb_url, :listing_id)
       end
       
   end

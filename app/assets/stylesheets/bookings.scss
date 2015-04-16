@@ -2,15 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+#sections-nav {
+  margin-top: -50px;
+  height: 50px;
+  margin-bottom: 0;
+  opacity: 0;
+  transition: opacity 0.8s;
+  &.affix {
+    width:100%;
+    opacity: 0.9;
+    z-index: 2;
+  }
+}
 
 .booking-form {
+  z-index: 4;
   .form-header {
     width:315px;
-    height:38px;
+    height:50px;
     background: #000;
     opacity: .6;
     color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     span {
       margin-top:auto;
     }
@@ -22,8 +37,8 @@
   padding: 0px;
   background: #fff;
   border: 1px solid #919191;
-  margin-top: -42px;
-
+  margin-top: -52px;
+  
   form {
     margin: 20px;
   }
@@ -49,10 +64,11 @@
     display:flex;
     justify-content:center;
   }
-  &.affixed {
-    position:fixed;
-    top:40px;
-    width: 315px;
-  }
-
+  
 }
+
+.affix {
+  top:50px;
+    
+}
+

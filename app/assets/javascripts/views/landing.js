@@ -22,6 +22,8 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
       this.setupSearch();
       this.bindSearchForm();
       this.$('video.banner-video').on('loadedmetadata', this.stretchBannerVideo.bind(this));
+      this.browseView = new LairDnD.Views.BrowseIndex(); ///////
+      
       return this;
     },
     stretchBannerVideo: function(e) {

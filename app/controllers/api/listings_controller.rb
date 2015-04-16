@@ -42,16 +42,24 @@ class Api::ListingsController < Api::ApiController
 
 
   private
+    def extract_amenities
+      amenities_included = params.require(:amenity).permit(*Listing.parsed_columns[:amenities].map(&:to_sym))
+      amenity_params = amenities_included.map do |k,v|
+        {k => v}
+      end
+      @amenity = Amenity.new(*amenity_params)
+      if !@amenity.save
+        render json: @amenity.errors.full_messages, status: 422
+        return
+      end
+    end
 
     def listing_params
-      params.require(:listing).permit(*Listing.column_names.map(&:to_sym))
+      params.require(:listing).permit(*Listing.parsed_columns[:complete].map(&:to_sym))
     end
 
     def parse_listings
-      fpfile_data = params.require(:listing).permit(:photos => [])
-      if fpfile_data
-        #TODO handle uploaded files
-      end
+      extract_amenities 
 
       listing_params
     end

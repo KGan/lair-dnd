@@ -2,13 +2,15 @@ LairDnD.Models.Listing = Backbone.Model.extend({
   urlRoot: '/api/listings',
   photos: function() {
     if (this._photos === undefined) {
-      this._photos = new LairDnD.Collections.Photos();
+      this._photos = new LairDnD.Collections.Photos([], {
+        listing: this
+      });
     }
     return this._photos;
   },
   owner: function() {
     if (this._owner === undefined) {
-      this._owner = new LairDnD.Models.User()
+      this._owner = new LairDnD.Models.User();
     }
     return this._owner;
   },
