@@ -43,6 +43,7 @@ LairDnD.Views.NewForm = Backbone.View.extend(
     var place = this.gsearch.getPlaces()[0];
     if (!place || !place.geometry) return;
     place = place.geometry.location;
+    this.extract(this.$('form'), place);
   },
 
   bindPlugins: function() {

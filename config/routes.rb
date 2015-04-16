@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :create, :destroy]
     resources :sessions, only: [:create, :destroy]
     get 'attrs/:modelname', to: 'attributes#attribute_list'
+    resources :bookings, only: [:show, :create, :index, :destroy]
   end
 
 end

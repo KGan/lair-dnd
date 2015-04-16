@@ -11,6 +11,11 @@ div.nav div.dropdown > ul.dropdown-menu {
   }
 }
 
+.flashes {
+  display: flex;
+  justify-content: center;
+}
+
 div.nav div.dropdown:hover > ul.dropdown-menu {
     display: block;
     height: 60px;
