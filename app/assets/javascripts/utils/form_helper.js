@@ -19,8 +19,8 @@ LairDnD.MapHelpers = {
       form.attr('method', 'get');
   },
   extract: function(form, place) {
-      form.append($('<input type="hidden" name="search[location][]" value="' + place.geometry.lat() + '">'));
-      form.append($('<input type="hidden" name="search[location][]" value="' + place.geometry.lng() + '">'));
+      form.append($('<input type="hidden" name="search[location][]" value="' + place.geometry.location.lat() + '">'));
+      form.append($('<input type="hidden" name="search[location][]" value="' + place.geometry.location.lng() + '">'));
       form.append($('<input type="hidden" name="search[name]" value="' + place.name + '">'));
   }
 };

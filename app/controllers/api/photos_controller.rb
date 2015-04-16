@@ -14,6 +14,17 @@ module Api
       end
     end
 
+
+    def destroy
+      @photo = Photo.get(params[:id])
+      if @photo
+        @photo.destroy
+        render :show
+      else
+        render json: {errors: 'could not find photo to destroy'}, status: 422
+      end
+    end
+
     private
       def photo_params
         params.permit(:photo_url, :thumb_url, :listing_id)

@@ -86,14 +86,14 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       }
 
       $('.rightpane').trigger('move-to', [place.geometry]);
-      place = place.geometry.location;
+      place_loc = place.geometry.location;
 
       if (LairDnD.current_router instanceof LairDnD.Routers.ListingRouter) {
         this.collection.fetch({
           data: {
             search: {
               location: [
-                place.lat(), place.lng()
+                place_log.lat(), place_loc.lng()
               ]
             }
           }

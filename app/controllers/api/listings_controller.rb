@@ -47,9 +47,9 @@ class Api::ListingsController < Api::ApiController
       amenities_included = params.permit(:amenity => Listing.parsed_columns[:amenities].map(&:to_sym))
       return unless amenities_included[:amenity]
       amenity_params = amenities_included[:amenity].map do |k,v|
-        {k => true}
+        [k, true]
       end
-      @amenity = Amenity.new(*amenity_params)
+      @amenity = Amenity.new(Hash[amenity_params])
       @amenity.listing_id = @listing.id
       if !@amenity.save
         render json: @amenity.errors.full_messages, status: 422
@@ -69,7 +69,8 @@ class Api::ListingsController < Api::ApiController
           render json: @location.errors.full_messages, status: 422
           return
         end
-        @location_alias = @listing.location_alias.create(name: loc_params[:name], location_id: @location.id)
+        @location_alias = LocationAlias.create(location_id: @location.id, name: loc_params[:name])
+        @listing.location_alias = @location_alias
       end
     end
 

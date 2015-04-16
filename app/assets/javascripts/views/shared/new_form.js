@@ -36,8 +36,8 @@ LairDnD.Views.NewForm = Backbone.View.extend(
     this.processUploadedImages.bind(this),
     function(FPError) {
       //var alert = new LairDnD.Views.Alert({
-        
-        // this.$el.append(alert.render().$el); 
+
+        // this.$el.append(alert.render().$el);
       //});
     });
   },
@@ -45,7 +45,6 @@ LairDnD.Views.NewForm = Backbone.View.extend(
   appendLocation: function() {
     var place = this.gsearch.getPlaces()[0];
     if (!place || !place.geometry) return;
-    place = place.geometry.location;
     this.extract(this.$('form'), place);
   },
 
@@ -64,12 +63,12 @@ LairDnD.Views.NewForm = Backbone.View.extend(
       filepicker.convert(
         blob,
         { width: 800, height: 600, fit: 'scale' },
-        photo.addUrl.bind(this, this.model.id, 'photo_url')
+        photo.addUrl.bind(photo, 'photo_url')
       );
       filepicker.convert(
         blob,
         { width: 170, height: 170, fit: 'scale' },
-        photo.addUrl.bind(this, this.model.id, 'thumb_url')
+        photo.addUrl.bind(photo, 'thumb_url')
       );
     }.bind(this));
   },
@@ -78,7 +77,7 @@ LairDnD.Views.NewForm = Backbone.View.extend(
     var formData = $(event.currentTarget).serializeJSON();
     this.model.save(formData, {
       success: function(model) {
-        Backbone.history.navigate('', {trigger: true});
+        Backbone.history.navigate('/', {trigger: true});
       },
       error: function(model, response) {
         if ( response.status === 403 && response.responseJSON ) {
@@ -88,7 +87,7 @@ LairDnD.Views.NewForm = Backbone.View.extend(
            alert: 'Error: ' + response.status,
            info: response.responseJSON ? response.responseJSON.errors : ''
          });
-         this.$el.append(alert.render().$el); 
+         this.$el.append(alert.render().$el);
         }
       }.bind(this)
     });

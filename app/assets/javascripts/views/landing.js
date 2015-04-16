@@ -23,7 +23,7 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
       this.bindSearchForm();
       this.$('video.banner-video').on('loadedmetadata', this.stretchBannerVideo.bind(this));
       this.browseView = new LairDnD.Views.BrowseIndex(); ///////
-      
+
       return this;
     },
     stretchBannerVideo: function(e) {
@@ -46,7 +46,6 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
         if (place === undefined || !place.geometry) {
           return;
         }
-        place = place.geometry.location;
         this.extract(this.$form, place);
     }
   })
