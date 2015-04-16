@@ -9,8 +9,9 @@ class Api::ListingsController < Api::ApiController
   end
 
   def create
-    @listing = current_user.listings.create(parse_listings)
+    @listing = current_user.listings.create(listing_params)
     if @listing.save
+      parse_listings
       render :show
     else
       render json: {errors: @listing.errors.full_messages}, status: 422
@@ -43,14 +44,32 @@ class Api::ListingsController < Api::ApiController
 
   private
     def extract_amenities
-      amenities_included = params.require(:amenity).permit(*Listing.parsed_columns[:amenities].map(&:to_sym))
-      amenity_params = amenities_included.map do |k,v|
-        {k => v}
+      amenities_included = params.permit(:amenity => Listing.parsed_columns[:amenities].map(&:to_sym))
+      return unless amenities_included[:amenity]
+      amenity_params = amenities_included[:amenity].map do |k,v|
+        {k => true}
       end
       @amenity = Amenity.new(*amenity_params)
+      @amenity.listing_id = @listing.id
       if !@amenity.save
         render json: @amenity.errors.full_messages, status: 422
         return
+      end
+    end
+
+    def extract_location 
+      loc_params = params.permit(:search => [:name, :location => []])[:search]
+      if loc_params
+        @location = Location.new(
+          latitude: loc_params[:location][0], 
+          longitude: loc_params[:location][1],
+          size: 10
+        )
+        if !@location.save
+          render json: @location.errors.full_messages, status: 422
+          return
+        end
+        @location_alias = @listing.location_alias.create(name: loc_params[:name], location_id: @location.id)
       end
     end
 
@@ -59,9 +78,8 @@ class Api::ListingsController < Api::ApiController
     end
 
     def parse_listings
-      extract_amenities 
-
-      listing_params
+      extract_amenities
+      extract_location
     end
 
     def search

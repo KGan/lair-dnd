@@ -1,4 +1,6 @@
 LairDnD.Views.MainView = Backbone.CompositeView.extend({
+  templates: {
+  },
   searchUrl: '/api/listings',
   events: {
     'submit .search-form': 'stopDefault'

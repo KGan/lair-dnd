@@ -23,5 +23,6 @@
 
 class Amenity < ActiveRecord::Base
   belongs_to :listing
+  validates_presence_of :listing
 
 end

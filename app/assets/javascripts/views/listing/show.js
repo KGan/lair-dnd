@@ -4,6 +4,13 @@
 
 LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   photoModal_template: JST['listings/modal_photos'],
+  events: {
+    'click .thumbnail.selector': 'selectPhoto',
+    'click #photoCarousel a.carousel-control': 'photoSlide',
+    'click #thumbCarousel a.carousel-control': 'thumbSlide',
+    'click .listing-expand': 'expandListing',
+    'submit .booking-form form': 'submitBooking'
+  },
   initialize: function(options){
     this.$el = options.$el;
     this.listenTo(this.model, 'sync', this.render);
@@ -14,11 +21,21 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
     this.setupBooking();
     this.setupStickies();
   },
-  events: {
-    'click .thumbnail.selector': 'selectPhoto',
-    'click #photoCarousel a.carousel-control': 'photoSlide',
-    'click #thumbCarousel a.carousel-control': 'thumbSlide',
-    'click .listing-expand': 'expandListing'
+  
+  submitBooking: function(e) {
+    e.preventDefault(); 
+    var booking = new LairDnD.Models.Booking();
+    booking.set($(e.currentTarget).serializeJSON());
+    booking.save({listing_id: this.model}, {
+      success: function(model, response) {
+        console.log('success');
+      },
+      error: function(model, response) {
+        if(response.status && response.responseJSON){
+          $('#login-modal').trigger('require-login-modal', [response.responseJSON]);
+        }
+      }
+    });
   },
 
   selectPhoto: function(e) {

@@ -84,7 +84,7 @@ class Listing < ActiveRecord::Base
 
 
   def self.parsed_columns
-    basics = ['housing_type', 'accomodates', 'bedrooms', 'location', 'photos', 'description', 'rules', 'price']
+    basics = ['title','housing_type', 'accomodates', 'bedrooms', 'price' ,'location', 'photos', 'description', 'rules']
     {
       basics: basics,
       amenities: Amenity.column_names - ['id', 'created_at', 'updated_at', 'listing_id'],

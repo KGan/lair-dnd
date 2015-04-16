@@ -35,7 +35,10 @@ LairDnD.Views.NewForm = Backbone.View.extend(
     },
     this.processUploadedImages.bind(this),
     function(FPError) {
-
+      //var alert = new LairDnD.Views.Alert({
+        
+        // this.$el.append(alert.render().$el); 
+      //});
     });
   },
 
@@ -49,7 +52,7 @@ LairDnD.Views.NewForm = Backbone.View.extend(
   bindPlugins: function() {
     filepicker.setKey("Am4pdKMVZS3i6kwFiJnYgz");
     this.gsearch = new google.maps.places.SearchBox(this.$('.listing-options input#location').get(0));
-    google.maps.event.addListener(this.gsearch, 'places_changed', this.appendLocation);
+    google.maps.event.addListener(this.gsearch, 'places_changed', this.appendLocation.bind(this));
   },
   processUploadedImages: function(Blobs) {
     this.photosCollection = new LairDnD.Collections.Photos([], {
@@ -81,9 +84,13 @@ LairDnD.Views.NewForm = Backbone.View.extend(
         if ( response.status === 403 && response.responseJSON ) {
           $('#login-modal').trigger('require-login-modal', [response.responseJSON]);
         } else {
-
+          var alert = new LairDnD.Views.Alert({
+           alert: 'Error: ' + response.status,
+           info: response.responseJSON ? response.responseJSON.errors : ''
+         });
+         this.$el.append(alert.render().$el); 
         }
-      }
+      }.bind(this)
     });
   }
 }));
