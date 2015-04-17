@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416224205) do
+ActiveRecord::Schema.define(version: 20150417175859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20150416224205) do
 
   add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
+
+  create_table "featureds", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "score"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+  end
+
+  add_index "featureds", ["location_id"], name: "index_featureds_on_location_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -110,6 +120,7 @@ ActiveRecord::Schema.define(version: 20150416224205) do
     t.integer  "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image_url"
   end
 
   create_table "photos", force: :cascade do |t|

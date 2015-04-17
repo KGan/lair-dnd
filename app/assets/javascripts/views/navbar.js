@@ -9,7 +9,6 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       'click .guest-login': 'guestLogin',
       'require-login-modal': 'modalWithError',
       'shown.bs.modal .modal': 'focusFirst',
-      'featured-search' : 'search'
     },
     initialize: function(options) {
       this.$el = options.$navbar;

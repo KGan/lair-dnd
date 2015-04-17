@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     get 'attrs/:modelname', to: 'attributes#attribute_list'
     resources :bookings, only: [:show, :create, :index, :destroy]
     resources :photos, only: [:show, :create, :destroy]
+    resources :locations, only: [:show] do 
+      collection do
+        get :featured
+      end
+    end
   end
 
 end

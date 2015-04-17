@@ -2,6 +2,7 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
   _.extend({}, LairDnD.MapHelpers, {
     template: JST['landing'],
     events: {
+      'featured-search form.landsearch': 'featuredSearch'
     },
 
     initialize: function(options) {
@@ -22,7 +23,10 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
       this.setupSearch();
       this.bindSearchForm();
       this.$('video.banner-video').on('loadedmetadata', this.stretchBannerVideo.bind(this));
-      this.browseView = new LairDnD.Views.BrowseIndex(); ///////
+      this.featuredLocations = new LairDnD.Collections.FeaturedLocations();
+      this.featuredLocations.fetch();
+      this.browseView = new LairDnD.Views.BrowseIndex({collection: this.featuredLocations}); 
+      this.$el.append(this.browseView.render().$el);
 
       return this;
     },
@@ -47,6 +51,13 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
           return;
         }
         this.extract(this.$form, place);
+    },
+    featuredSearch: function(e, m) {
+      $(e.currentTarget).html($('<input type="hidden" name="search[location][]" value="' + m.get('latitude') + '">'));
+      $(e.currentTarget).append($('<input type="hidden" name="search[location][]" value="' + m.get('longitude') + '">'));
+      $(e.currentTarget).submit();
+
     }
+
   })
 );

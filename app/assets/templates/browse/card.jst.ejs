@@ -1,4 +1,2 @@
-<div class='featured-location'>
-  <a href='javascript:void(0)'><img class='browse-img' src='<%= location.get('image_url') %>'></img></a>
-  <span class='location-name'><%= location.get('name') %></span>
-</div>
+  <a href='javascript:void(0)'><img class='browse-img' src='<%= location.escape('image_url') %>'></img></a>
+  <span class='location-name'><%= location.escape('name') %></span>

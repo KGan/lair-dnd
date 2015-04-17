@@ -1,0 +1,40 @@
+#featured-locations {
+  height: 100%;
+  #featured-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    height:100%; 
+    .featured-location {
+      position:relative;
+      height: 400px;
+      img.browse-img {
+         width: 100%;
+         padding: 20px;
+         height: 400px;
+         position: absolute;
+      }
+      span.location-name {
+        position:absolute;
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    
+
+
+  }
+  
+}
+
+.group {
+  &:after {
+      content: '';
+      display: block;
+      clear:both;
+  }
+}

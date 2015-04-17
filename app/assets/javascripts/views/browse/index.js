@@ -1,9 +1,9 @@
 LairDnD.Views.BrowseIndex = Backbone.CompositeView.extend(
   _.extend({}, {
-    template: JST['browse/index'],
+    template: JST['browse/featureds'],
     events: {},
     initialize: function(options) {
-      
+      this.listenTo(this.collection, 'sync add remove', this.render);
     },
     render: function() {
       var content = this.template();
@@ -12,8 +12,8 @@ LairDnD.Views.BrowseIndex = Backbone.CompositeView.extend(
         var subview = new LairDnD.Views.FLCard({
           model: model
         });
-        this.addSubview('#featured-list');
-      });
+        this.addSubview('#featured-list', subview);
+      }.bind(this));
       return this;
     }
   })

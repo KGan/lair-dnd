@@ -11,15 +11,26 @@ User.create!(username: 'Guest', email: 'Guest', password: 'password', guest: tru
               password: Faker::Internet.password(7,15))
 end
 
+categs = ['nightlife', 'city', 'nature']
+
 ['San Francisco, CA, USA', 'San Jose, CA, USA', 'San Leandro, CA, USA', 'Oakland, CA, USA' , 'New York City, NY USA', 'Paris, France', 'Tokyo, Japan', 'Cancun, Mexico', 'Rome, Italy'].each do |guaranteed_seed|
   deciphered = Geokit::Geocoders::MultiGeocoder.geocode(guaranteed_seed)
   if deciphered.success
-    newloc = Location.create!(latitude: deciphered.lat, longitude: deciphered.lng, size: 10)
+    newloc = Location.create!(latitude: deciphered.lat, 
+                              longitude: deciphered.lng, 
+                              size: 10,
+                              image_url: "http://lorempixel.com/640/480/#{categs.sample}/#{rand(10)}"
+                             )
+    Featured.create!(location_id: newloc.id, name: guaranteed_seed)
     LocationAlias.create!(name: deciphered.full_address, location_id: newloc.id)
     30.times do
-      sleep 1
+      sleep (1.0/2.0)
       revarr = [ deciphered.lat + rand() * 7/69 - 7/138 , deciphered.lng + rand() * 7/69 - 7/138 ]
-      shiftloc = Location.create!(latitude: revarr.first, longitude: revarr.last, size: 10)
+      shiftloc = Location.create!(latitude: revarr.first, 
+                                  longitude: revarr.last, 
+                                  size: 10,
+                                  image_url: "http://lorempixel.com/640/480/#{categs.sample}/#{rand(10)}"
+                                 )
       LocationAlias.create!(name: (Geokit::Geocoders::GoogleGeocoder.reverse_geocode revarr).full_address, location_id: shiftloc.id)
     end
   end

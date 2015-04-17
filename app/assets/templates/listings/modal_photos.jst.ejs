@@ -14,7 +14,7 @@
                             <div class="<% if(index === selected_id){ %>
                                 <%= 'active' %>
                               <% } %> item" data-slide-number='<%= index %>'>
-                            <img src='<%= photo.get("photo_url") %>'></div>
+                            <img src='<%= photo.escape("photo_url") %>'></div>
                           <% }) %>
                         </div><!-- Carousel nav -->
                         <a class="carousel-control left" data-slide="prev" href="javascript:void(0)">‹</a>
@@ -51,7 +51,7 @@
                       <% } %>
                       '>
                       <a href='javascript:void(0)' class='thumbnail selector' data-c-id='<%=index%>'>
-                        <img src='<%=photo.get("thumb_url")%>'>
+                        <img src='<%=photo.escape("thumb_url")%>'>
                       </a>
                     </div>
                     <% if ((index + 1) % 5 === 0) { %>
