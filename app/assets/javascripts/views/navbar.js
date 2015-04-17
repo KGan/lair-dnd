@@ -8,7 +8,8 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       'un-landing' : 'unLanding',
       'click .guest-login': 'guestLogin',
       'require-login-modal': 'modalWithError',
-      'shown.bs.modal .modal': 'focusFirst'
+      'shown.bs.modal .modal': 'focusFirst',
+      'featured-search' : 'search'
     },
     initialize: function(options) {
       this.$el = options.$navbar;
@@ -48,6 +49,7 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       this.$('.modal .flashes').html('<i class="icon notched circle loading"></i>');
       m.save(creds, {
         success: function() {
+          Backbone.history.navigate('/');
           location.reload(true);
         },
         error: function(model, response) {
@@ -79,9 +81,25 @@ LairDnD.Views.Navbar = Backbone.View.extend(
       this.searchBox = new google.maps.places.SearchBox(this.$('#nv-search').get(0));
       google.maps.event.addListener(this.searchBox, 'places_changed', this.search.bind(this));
     },
-    search: function() {
-      var place = this.searchBox.getPlaces()[0];
+    search: function(gplace) {
+      var place;
+      if( gplace ) {
+        place = gplace;
+      } else {
+        if (!this.searchBox.getPlaces()) return;
+        place = this.searchBox.getPlaces()[0];
+      }
+      
       if (place === undefined || !place.geometry) {
+        var alert = new LairDnD.Views.Alert({
+          position: {
+            v: 'top',
+            h: 'left'
+          },
+          alert: "Sorry, no matching location found"
+        });
+        $('body').append(alert.render().$el);
+        this.$('#nv-search').val('');
         return;
       }
 
@@ -93,7 +111,7 @@ LairDnD.Views.Navbar = Backbone.View.extend(
           data: {
             search: {
               location: [
-                place_log.lat(), place_loc.lng()
+                place_loc.lat(), place_loc.lng()
               ]
             }
           }

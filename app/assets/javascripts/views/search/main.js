@@ -9,7 +9,19 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
     this.rightpane.$el.trigger('select-marker', [id]);
   },
   initialize: function(options) {
-    this.searched_location = options.query_params.location;
+    this.searched_location = options.query_params.location ;
+    if (!this.searched_location){
+      this.searched_location = [37.7034, -122.527];
+      var alert = new LairDnD.Views.Alert({
+        position: {
+          v: 'top',
+          h: 'left'
+        },
+        alert: 'No Location Found',
+        info: 'Defaulting to "San Francisco"'
+      });
+      $('body').append(alert.render().$el);
+    }
     this.collection.fetch({
       data: { search: options.query_params }
     });
@@ -37,7 +49,9 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
   mapSearch: function(e, map) {
     var origin = map.getCenter();
     var bounds = map.getBounds();
-    if (!origin || !bounds) return;
+    if (!origin || !bounds) {
+      return;
+    }
     var ne = bounds.getNorthEast();
     var range = google.maps.geometry.spherical.computeDistanceBetween(origin, ne) / 1609.34;
     this.collection.fetch({

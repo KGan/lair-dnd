@@ -19,7 +19,6 @@ class Booking < ActiveRecord::Base
   belongs_to :listing
   belongs_to :user
 
-
   def overlap?(other)
     return (other.dtstart < self.dtend && self.dtstart < other.dtend)
   end

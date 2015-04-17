@@ -12,6 +12,8 @@ LairDnD.Models.Photo = Backbone.Model.extend({
   trySave: function(attrs, options) {
     attrs = attrs || {};
 
+    if (!this.changedAttributes(attrs)) return;
+
     this.set(attrs);
     options = options || {};
     if (this.ready()) {

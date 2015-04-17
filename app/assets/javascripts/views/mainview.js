@@ -12,14 +12,18 @@ LairDnD.Views.MainView = Backbone.CompositeView.extend({
   setupDatepicker: function(startDate, endDate){
     startDate.datepicker({
       defaultDate: "+1w",
+      dateFormat: 'yy-mm-dd',
+      minDate: "+1d",
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
         endDate.datepicker( "option", "minDate", selectedDate );
       }
     });
-    endDate.datepicker({
+  endDate.datepicker({
       defaultDate: "+1w",
+      dateFormat: 'yy-mm-dd',
+      minDate: "+1d",
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {

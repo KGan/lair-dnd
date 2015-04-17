@@ -3,15 +3,14 @@ LairDnD.Views.ListingCard = Backbone.View.extend({
   className: 'listing-card col-md-6',
 
   events: {
-    'mouseover': 'pubhoverrr',
-    'click' : 'lel'
+    'mouseover': 'pubhover',
   },
   render: function() {
     var content = this.template({ listing: this.model });
     this.$el.html(content);
     return this;
   },
-  pubhoverrr: function(e) {
+  pubhover: function(e) {
     e.preventDefault();
    this.$el.trigger('selected-panel', [this.model.id]); 
   }

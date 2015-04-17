@@ -2,7 +2,7 @@ Session.destroy_all
 User.destroy_all
 Listing.destroy_all
 
-User.create!(username: 'Keving', email: 'Keving', password: 'password')
+User.create!(username: 'Keving', email: 'Keving', password: 'password', admin: true)
 User.create!(username: 'Guest', email: 'Guest', password: 'password', guest: true)
 
 10.times do
@@ -34,6 +34,7 @@ end
 
 100.times do
   l = Listing.create!(owner_id: rand(1..User.count),
+                      pending: false,
                  title: Faker::Lorem.words(4, true).join(' '),
                  accomodates: rand(5),
                  price: rand(20..500),

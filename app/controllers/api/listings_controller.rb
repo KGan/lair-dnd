@@ -25,6 +25,7 @@ class Api::ListingsController < Api::ApiController
 
   def update
     @listing = Listing.find(params[:id])
+
     if @listing.update(parse_listings)
       render :show
     else
@@ -34,8 +35,8 @@ class Api::ListingsController < Api::ApiController
 
   def show
     @listing = Listing.includes(Listing.reflections.keys.map(&:to_sym)).find(params[:id])
-    unless @listing
-      render json: ['no listing found'], status: 403
+    if !@listing || (@listing.pending && (!signed_in? || (current_user.id != @listing.owner_id)))
+      render json: {errors: 'not found'}, status: 404 
     end
   end
 
@@ -84,7 +85,7 @@ class Api::ListingsController < Api::ApiController
     end
 
     def search
-      Listing.search(search_params)
+      Listing.search(search_params, current_user ? current_user.id : nil)
     end
 
     def search_params

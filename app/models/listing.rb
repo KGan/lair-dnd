@@ -72,9 +72,10 @@ class Listing < ActiveRecord::Base
     super(*args).includes(location_alias: :location).references(:location)
   end
 
-  def self.search(query)
+  def self.search(query, cid)
     query = query['search']
     scope = Listing
+    scope = scope.where.not(owner_id: cid, pending: true)
     range = query['range'] || 10
     page = query['page'] || 1
     loc = query['location']

@@ -28,6 +28,13 @@
   .listing-card {
     height: 40%;
     margin-top: 20px;
+    &:hover .panel-image{
+      box-shadow: rgba(117,170,179,2) 0 0 10px;
+      -webkit-filter:blur(1px) contrast(125%);
+      -moz-filter:blur(1px) contrast(125%);
+      -o-filter:blur(1px) contrast(125%);
+      -ms-filter: blur(1px) contrast(125%);
+    }
     .panel-image {
       height: 80%;
     }

@@ -21,20 +21,48 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
     this.setupBooking();
     this.setupStickies();
   },
-  
+
   submitBooking: function(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     var booking = new LairDnD.Models.Booking();
-    booking.set($(e.currentTarget).serializeJSON());
-    booking.save({listing_id: this.model}, {
+    var form = $(e.currentTarget);
+    var params = form.serializeJSON();
+    booking.save({
+      listing_id: this.model.id,
+      dtstart: params.checkin,
+      dtend: params.checkout,
+      guests: params.guests
+    }, {
       success: function(model, response) {
-        console.log('success');
-      },
+        var alert = new LairDnD.Views.Alert({
+          position: {
+            v: 'bottom',
+            h: 'right'
+          },
+          alert: 'Booking Saved',
+          info: 'You are booked for ' +
+            this.model.get('title') + ' from ' +
+            (new Date(model.get('dtstart'))).toDateString() + ' to '+
+            (new Date(model.get('dtend'))).toDateString()
+        });
+        this.$el.append(alert.render().$el);
+        form.find(':input').not(':input[type=submit]').val('');
+      }.bind(this),
       error: function(model, response) {
-        if(response.status && response.responseJSON){
+        if(response.status === 403 && response.responseJSON){
           $('#login-modal').trigger('require-login-modal', [response.responseJSON]);
+        } else {
+          var alert = new LairDnD.Views.Alert({
+            position: {
+              v: 'bottom',
+              h: 'right'
+            },
+            alert: 'Error: ' + response.statusText,
+            info: response.responseJSON ? (response.responseJSON.errors ? response.responseJSON.errors : response.responseJSON ) : ""
+          });
+          this.$el.append(alert.render().$el);
         }
-      }
+      }.bind(this)
     });
   },
 
@@ -59,7 +87,7 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
    });
   },
 
-  
+
 
   render: function(){
     this.renderModal();

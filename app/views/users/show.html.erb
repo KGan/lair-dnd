@@ -1,2 +1,29 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div id='bb-content'>
+  <div class='col-md-2' id='user-profile-sidebar'>
+  </div>
+  <div class='col-md-4 col-md-offset-2' id='listings'>
+    <ul style='list-style:none;'>    
+      <% @user.listings.each do |listing| %>
+        <li role='presentation' class='col-md-12'><a class='col-md-8' href='<%= listing_url(listing) %>'><%= listing.title %></a> 
+          <% if listing.pending %>
+            <span class='text-muted'>Pending</span>
+          <% end %>
+          <% if signed_in? && (current_user.id == @user.id || current_user.try(:admin)) %>
+            <a href='javascript:void(0)' class='edit'><div class='col-md-2 text-muted'>Edit</div></a>
+            <a href='javascript:void(0)' class='destroy'><div class='col-md-2 text-muted'>Delete Listing</div></a>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<script type='text/javascript'>
+  $(function(){
+    new LairDnD.Routers.BaseRouter({
+      $rootEl: $('#bb-content'),
+      $navbar: $('nav.navbar'),
+      $flashes: $('#flashes')
+    });
+    Backbone.history.start();
+  });
+</script>
