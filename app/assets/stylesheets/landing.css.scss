@@ -1,9 +1,16 @@
-video.banner-video {
-  top:-70px;
-  left:0;
-  z-index: -1;
-  position: relative;
-  overflow: hidden;
+#banner-video {
+  video.banner-video {
+    left:0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  object-fit: cover;
+  width: 100%;
+  height: 550px;
+  overflow:hidden;
+  margin-top: -70px;
 }
 
 .welcome {

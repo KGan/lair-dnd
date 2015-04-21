@@ -92,7 +92,11 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   render: function(){
     this.renderModal();
     this.renderSeeMores();
+    this.renderReviews();
     return this;
+  },
+
+  renderReviews: function() {
   },
 
   renderSeeMores: function(){

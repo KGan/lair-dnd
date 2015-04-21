@@ -21,6 +21,7 @@
 #  bathrooms            :integer
 #  checkin              :time
 #  checkout             :time
+#  pending              :boolean          default(TRUE)
 #
 
 class Listing < ActiveRecord::Base
@@ -31,9 +32,10 @@ class Listing < ActiveRecord::Base
   validates_presence_of :user, :title, :accomodates, :price, :description
   validates :housing_type, inclusion: {in: TYPES}
   has_one :amenity, primary_key: :id, foreign_key: :listing_id, dependent: :destroy
-  has_many :photos, dependent: :destroy
   has_one :location_mapping, dependent: :destroy
   has_one :location_alias, through: :location_mapping
+  has_many :photos, dependent: :destroy
+  has_many :reviews, as: :reviewable
   acts_as_mappable through: {location_alias: :location}
   def is_owner?(u)
     !!(u.id == self.owner_id)
@@ -44,7 +46,6 @@ class Listing < ActiveRecord::Base
     a = self.photos.where(:main => true).first
     a ? a : self.photos.first
   end
-
 
   def self.by_location(orig, range)
     if orig

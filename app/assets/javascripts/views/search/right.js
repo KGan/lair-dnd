@@ -1,4 +1,3 @@
-
 LairDnD.Views.RightPane = Backbone.CompositeView.extend({
   template: JST['search/rightpane'],
   className: 'col-md-12',
@@ -123,10 +122,19 @@ LairDnD.Views.RightPane = Backbone.CompositeView.extend({
         title: listing.get('title') + ': ' + listing.get('location_name')
       });
       this.addMarker(newmarker, listing.id);
-      google.maps.event.addListener(newmarker, 'click', function() {
-        this.infowindow.setContent('<div><strong>' + newmarker.title + '</strong></div>');
-        this.infowindow.open(this.map, newmarker);
-      }.bind(this));
+      this.addListenersToMarker(newmarker, listing.id);
     }.bind(this));
+  },
+  addListenersToMarker: function(marker, lid) {
+      google.maps.event.addListener(marker, 'click', function() {
+        this.infowindow.setContent('<div><strong>' + marker.title + '</strong></div>');
+        this.infowindow.open(this.map, marker);
+      }.bind(this));
+      google.maps.event.addListener(marker, 'mouseover', function() {
+        this.$el.trigger('marker-selected', [marker, lid]);
+      }.bind(this));
+      google.maps.event.addListener(marker, 'mouseout', function() {
+        this.$el.trigger('marker-unselected', [marker, lid]);
+      }.bind(this));
   }
 });

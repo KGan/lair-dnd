@@ -21,6 +21,7 @@
 #  bathrooms            :integer
 #  checkin              :time
 #  checkout             :time
+#  pending              :boolean          default(TRUE)
 #
 
 require 'test_helper'

@@ -10,6 +10,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  profile_photo_id :integer
+#  admin            :boolean          default(FALSE), not null
 #
 
 class User < ActiveRecord::Base
@@ -84,6 +85,10 @@ class User < ActiveRecord::Base
     if self.sessions.length < 1
      create_session
     end
+  end
+
+  def stayed_at?(listing)
+    self.bookings.where(listing_id: listing.id).exists?(['dtend < ?', Time.now])
   end
 
 end

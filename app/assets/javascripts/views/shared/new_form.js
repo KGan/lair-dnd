@@ -77,6 +77,11 @@ LairDnD.Views.NewForm = Backbone.View.extend(
     var formData = $(event.currentTarget).serializeJSON();
     this.model.save(formData, {
       success: function(model) {
+        var alert = new LairDnD.Views.Alert({
+          alert: 'Success!',
+          info: 'Your listing is now pending while we review it.'
+        });
+        $('body').append(alert.render().$el);
         Backbone.history.navigate('/', {trigger: true});
       },
       error: function(model, response) {

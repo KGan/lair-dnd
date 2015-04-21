@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :featured
       end
     end
+    resources :review
   end
 
 end

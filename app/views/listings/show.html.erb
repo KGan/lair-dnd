@@ -21,7 +21,7 @@
   <div class=' media col-md-7' id='listing-basic'>
     <div class="media-left">
       <div class="col-md-12">
-        <a href="javascript:void(0)">
+        <a href="/users/<%= @listing.user.id %>">
           <img class='media-object profile-photo media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
         </a>
       </div>

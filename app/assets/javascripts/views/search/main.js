@@ -3,7 +3,12 @@ LairDnD.Views.SearchMain = Backbone.CompositeView.extend({
   id: 'results-page',
   events: {
     'selected-panel': 'selectMarker',
-    'map-search': 'mapSearch'
+    'map-search': 'mapSearch',
+    'marker-selected': 'scrollToPanel',
+    'marker-unselected': 'unselectPanel'
+  },
+  scrollToPanel: function(e, marker, id) {
+    this.leftpane.$el.trigger('scroll-panel', [marker, id]);
   },
   selectMarker: function(e, id) {
     this.rightpane.$el.trigger('select-marker', [id]);

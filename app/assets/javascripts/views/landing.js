@@ -22,7 +22,7 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
       this.$el.html(content);
       this.setupSearch();
       this.bindSearchForm();
-      this.$('video.banner-video').on('loadedmetadata', this.stretchBannerVideo.bind(this));
+      this.setupVideos();
       this.featuredLocations = new LairDnD.Collections.FeaturedLocations();
       this.featuredLocations.fetch();
       this.browseView = new LairDnD.Views.BrowseIndex({collection: this.featuredLocations}); 
@@ -30,16 +30,8 @@ LairDnD.Views.Landing = Backbone.CompositeView.extend(
 
       return this;
     },
-    stretchBannerVideo: function(e) {
-        this.$bannerVideo = $(e.currentTarget);
-        var width = this.$bannerVideo.prop('videoWidth');
-        var windowWidth = $(window).width();
-        var widthRatio = windowWidth / width;
-
-        this.$('video.banner-video').css({
-          'height'   : '550',
-          'transform': 'scaleX('+ widthRatio + ')'
-        });
+    setupVideos: function() {
+      this.video = this.$('video.banner-video');
     },
     bindSearchForm: function() {
         this.searchBox = new google.maps.places.SearchBox(this.$('#search-input').get(0));

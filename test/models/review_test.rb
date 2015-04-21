@@ -1,19 +1,19 @@
 # == Schema Information
 #
-# Table name: locations
+# Table name: reviews
 #
 #  id         :integer          not null, primary key
-#  longitude  :decimal(, )
-#  latitude   :decimal(, )
-#  size       :integer
+#  comment    :string
+#  rating     :integer
+#  listing_id :integer          not null
+#  user_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  image_url  :string
 #
 
 require 'test_helper'
 
-class LocationTest < ActiveSupport::TestCase
+class ReviewTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

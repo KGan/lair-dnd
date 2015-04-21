@@ -25,14 +25,13 @@ LairDnD.Routers.ListingRouter = LairDnD.Routers.BaseRouter.extend({
 
   after_init: function(options) {
     this.query_params = options.query_params;
+  },
+
+  searchListings: function() {
     this.views.mainView = new LairDnD.Views.SearchMain({
       collection: this.collections.listings,
       query_params: this.query_params
     });
     this._swapView('$rootEl', this.views.mainView);
-  },
-
-  searchListings: function() {
-
   }
 });
