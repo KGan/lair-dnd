@@ -52,13 +52,20 @@ span, article, footer, time, small {
   // background: transparent;
 }
 //
+.row-centered {
+  text-align: center;
+}
+.col-centered {
+  float: none;
+  text-align: left;
+  display: inline-block;
+}
+
+
 a:hover {
   text-decoration: none;
 
 }
-
-
-
 
 input[type="password"],
 input[type="email"],

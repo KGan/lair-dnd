@@ -1,1 +1,10 @@
- 
+<div class='form-group' id='rating'>
+  <label >Rating</label>
+  <% for(var i = 1; i <= 5; i++) { %>
+    <i class='icon empty star large' data-id=<%=i%>></i>
+  <% } %>
+</div> 
+<div class='form-group'>
+  <textarea name='comment' id='comment' placeholder='Comment about your experience here...' class='form-control'></textarea>
+</div>
+<button class='btn btn-small'>Submit Review</button>

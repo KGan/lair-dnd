@@ -1,156 +1,164 @@
 <div class='listing-show' id='listing-show'>
-<a href='javascript:void(0)' class='primary_image' data-toggle="modal" data-target="#photo-modal">
-  <img src='<%= @listing.main_photo.photo_url %>' alt='main photo'></img>
-</a>
-<div class="modal fade" id="photo-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <a href='javascript:void(0)' class="close" data-dismiss="modal" style='z-index:2;'><i class='fa fa-times-circle fa-4x'></i></a>
+  <div class='show-first group row row-centered'>
+    <a href='javascript:void(0)' class='primary_image' data-toggle="modal" data-target="#photo-modal">
+      <img src='<%= @listing.main_photo.photo_url %>' alt='main photo'></img>
+    </a>
+    <div class="modal fade" id="photo-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <a href='javascript:void(0)' class="close" data-dismiss="modal" style='z-index:2;'><i class='fa fa-times-circle fa-4x'></i></a>
 
-  <div class="modal-content">
-  </div>
-</div>
-
-<div class="subnav navbar navbar-inverse sticky" id='sections-nav'>
-  <ul role='tablist' class='col-md-8 col-md-offset-2 nav navbar-nav navbar-left'>
-    <% %w(basic details amenities description rules photos).each do |section| %>
-      <li role='presentation'><a href='#listing-<%=section%>'><%= section.capitalize %></a></li>
-    <% end %>
-  </ul>
-</div>
-
-<div class='col-md-8 col-md-offset-2' id='all-sections'>
-  <div class=' media col-md-7' id='listing-basic'>
-    <div class="media-left">
-      <div class="col-md-12">
-        <a href="/users/<%= @listing.user.id %>">
-          <img class='media-object profile-photo media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
-        </a>
-      </div>
-      <div class="lister-name">
-        <span class='grey h5'><%= @listing.user.username || @listing.user.email %></span>
-      </div>
-    </div>
-    <div class='media-body'>
-
-      <div class="media-heading h3">
-        <div>
-          <%= @listing.title %><br>
-        </div>
-        <div class='address h5'>
-          <%= @listing.location_alias.try(:name) %>
-        </div>
-        <% #placeholder until reviews %>
-        <div class='stars h4'>
-          <% n = rand(1..5) %>
-          <% n.times do %>
-            <i class='icon large star'></i>
-          <% end %>
-          <% (5-n).times do %>
-            <i class='icon large empty star'></i>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <i class='icon large home'></i><br>
-        <%= @listing.housing_type %>
-      </div>
-      <div class="col-md-3">
-        <i class='icon large users'></i><br>
-        <%= @listing.accomodates %> Guests
-      </div>
-      <div class="col-md-3">
-        <i class='icon trash large'></i><br>
-        <%= @listing.bedrooms %> Bedrooms
-      </div>
-      <div class="col-md-3">
-        <i class='fa fa-bed fa-2x'></i><br>
-        <%= @listing.beds %> Beds
-      </div>
-
-    </div>
-  </div>
-
-  <div class='form-v col-md-5 pull-right'>
-    <div class="booking-form sticky">
-        <%= render 'shared/booking_form', listing: @listing %>
-    </div>
-  </div>
-
-  <div class='detail-area col-md-7'>
-    <div class='listing-section' id='listing-details'>
-      <div class='col-md-2 cate-title'>
-        Details
-      </div>
-
-      <div class="col-md-5 cate-detail">
-        <div class='cate-item col-md-12'>
-          Check In: <%= @listing.checkin.strftime('%I:%M%p') %>
-        </div>
-        <div class='cate-item col-md-12'>
-          Check Out: <%= @listing.checkout.strftime('%I:%M%p') %>
-        </div>
-
+      <div class="modal-content">
       </div>
     </div>
 
+    <div class="subnav navbar navbar-inverse sticky " id='sections-nav'>
+      <ul role='tablist' class='col-md-10 col-centered nav navbar-nav '>
+        <% %w(basic details amenities description rules photos).each do |section| %>
+          <li role='presentation'><a href='#listing-<%=section%>'><%= section.capitalize %></a></li>
+        <% end %>
+      </ul>
+    </div>
 
-    <div class='listing-section' id='listing-amenities'>
-      <div class='col-md-2 cate-title'>
-        Amenities
-      </div>
+    <div class='col-md-10 col-sm-12 col-centered' id='listing-summary'>
+      <div class=' media col-md-7 col-sm-12' id='listing-basic'>
+        <div class="media-left">
+          <div class="col-md-12">
+            <a href="/users/<%= @listing.user.id %>">
+              <img class='media-object profile-photo media-round' src='<%= @listing.user.try(:profile_photo).try(:photo_url) %>'>
+            </a>
+          </div>
+          <div class="lister-name">
+            <span class='grey h5'><%= @listing.user.username || @listing.user.email %></span>
+          </div>
+        </div>
+        <div class='media-body'>
 
-      <% @amenity_names.each_slice(((@amenity_names.length / 2.0) + 0.49).round) do |amenity_slice| %>
-        <div class='col-md-5 cate-detail'>
-          <% amenity_slice.each do |amenity| %>
-            <% provided = @amenities.send(amenity) ? 'provided' : 'unprovided' %>
+          <div class="media-heading h3">
+            <div>
+              <%= @listing.title %><br>
+            </div>
+            <div class='address h5'>
+              <%= @listing.location_alias.try(:name) %>
+            </div>
+            <% #placeholder until reviews %>
+            <div class='stars h4'>
+              <% n = rand(1..5) %>
+              <% n.times do %>
+                <i class='icon large star'></i>
+              <% end %>
+              <% (5-n).times do %>
+                <i class='icon large empty star'></i>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <i class='icon large home'></i><br>
+            <%= @listing.housing_type %>
+          </div>
+          <div class="col-md-3">
+            <i class='icon large users'></i><br>
+            <%= @listing.accomodates %> Guests
+          </div>
+          <div class="col-md-3">
+            <i class='icon trash large'></i><br>
+            <%= @listing.bedrooms %> Bedrooms
+          </div>
+          <div class="col-md-3">
+            <i class='fa fa-bed '></i><br>
+            <%= @listing.beds %> Beds
+          </div>
+        </div>
+      </div> <!-- listing basic -->
+      <div class='form-v col-md-5 col-sm-12'>
+        <div class="booking-form sticky">
+            <%= render 'shared/booking_form', listing: @listing %>
+        </div>
+      </div> <!-- booking form -->
+    </div> <!-- listing summary -->
+  </div> <!-- show first section grey -->
+  <div class='show-mid group row row-centered'>
+    <div class='col-md-10  col-centered col-sm-12'>
+      <div class='detail-area col-md-7 col-sm-12'>
+        <div class='listing-section' id='listing-details'>
+          <div class='col-md-2 cate-title'>
+            Details
+          </div>
+
+          <div class="col-md-5 cate-detail">
             <div class='cate-item col-md-12'>
-              <i class='<%= icon[amenity] ? icon[amenity] : icon['default'] %> <%= provided %> col-md-3'></i>
-              <span class='<%= provided %> col-md-9'><%= amenity.gsub('_', ' ') %></span>
+              Check In: <%= @listing.checkin.strftime('%I:%M%p') %>
+            </div>
+            <div class='cate-item col-md-12'>
+              Check Out: <%= @listing.checkout.strftime('%I:%M%p') %>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class='listing-section' id='listing-amenities'>
+          <div class='col-md-2 cate-title'>
+            Amenities
+          </div>
+
+          <% @amenity_names.each_slice(((@amenity_names.length / 2.0) + 0.49).round) do |amenity_slice| %>
+            <div class='col-md-5 cate-detail'>
+              <% amenity_slice.each do |amenity| %>
+                <% provided = @amenities.send(amenity) ? 'provided' : 'unprovided' %>
+                <div class='cate-item col-md-12'>
+                  <i class='<%= icon[amenity] ? icon[amenity] : icon['default'] %> <%= provided %> col-md-3'></i>
+                  <span class='<%= provided %> col-md-9'><%= amenity.gsub('_', ' ') %></span>
+                </div>
+              <% end %>
             </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
 
-    <div class='listing-section media' id='listing-description'>
-      <div class='col-md-2 cate-title'>
-        Description
-      </div>
-      <div class="col-md-10 cate-detail">
-        <div class='col-md-10 col-md-offset-1 cate-item'>
-          <%= @listing.description %>
+        <div class='listing-section media' id='listing-description'>
+          <div class='col-md-2 cate-title'>
+            Description
+          </div>
+          <div class="col-md-10 cate-detail">
+            <div class='col-md-10 col-md-offset-1 cate-item'>
+              <%= @listing.description %>
+            </div>
+          </div>
+        </div>
+
+        <div class='listing-section media' id='listing-rules'>
+          <div class='col-md-2 cate-title'>
+            Rules
+          </div>
+          <div class="col-md-10 cate-detail">
+            <div class='col-md-10 col-md-offset-1 cate-item'>
+              <%= @listing.rules %>
+            </div>
+          </div>
+        </div>
+
+        <div class="listing-section media" id='listing-photos'>
+          <% @listing.photos.sample(5).each_with_index do |photo, i| %>
+              <a href='javascript:void(0)' class='col-md-<%= i < 2 ? '6 featured': '4 subfeatured' %>' data-toggle="modal" data-target="#photo-modal">
+                <img src='<%=photo.photo_url%>' alt='featured'></img>
+              </a>
+            <% end %>
         </div>
       </div>
-    </div>
-
-    <div class='listing-section media' id='listing-rules'>
-      <div class='col-md-2 cate-title'>
-        Rules
-      </div>
-      <div class="col-md-10 cate-detail">
-        <div class='col-md-10 col-md-offset-1 cate-item'>
-          <%= @listing.rules %>
-        </div>
-      </div>
-    </div>
-
-    <div class="listing-section media" id='listing-photos'>
-      <% @listing.photos.sample(5).each_with_index do |photo, i| %>
-          <a href='javascript:void(0)' class='col-md-<%= i < 2 ? '6 featured': '4 subfeatured' %>' data-toggle="modal" data-target="#photo-modal">
-            <img src='<%=photo.photo_url%>' alt='featured'></img>
-          </a>
-        <% end %>
-    </div>
-
-    <div class="review-section" id='listing-reviews'>
-      
     </div>
   </div>
-</div>
+  <div class='show-bottom group row row-centered'>
+    <div class='col-md-10 col-sm-12 col-centered'>
+      <div class='col-md-7 col-sm-12'>
+        <div class="review-section" id='listing-reviews'>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-<div class='google-map' id='listing-map'>
-</div>
+  <div class='google-map' id='listing-map'>
+  </div>
 
 </div>
 

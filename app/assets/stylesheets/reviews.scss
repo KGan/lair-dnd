@@ -1,0 +1,29 @@
+// Place all the styles related to the api/reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.review {
+  &:before {
+    content: '';
+    display: absolute;
+    left: 0px;
+    right: 0px;
+    height: 1px;
+    top: 0px;
+  }
+  padding-top: 15px;
+  .profile-picture {
+    img.profile-photo {
+      height: 70px;
+
+      width: 70px;
+      transform: none;
+    }
+  }
+  .media-body {
+    padding: 15px;
+  }
+}
+
+#past-reviews {
+  padding-top: 30px;
+}

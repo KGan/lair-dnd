@@ -20,6 +20,7 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   setup: function() {
     this.setupBooking();
     this.setupStickies();
+    this.renderReviews();
   },
 
   submitBooking: function(e) {
@@ -92,11 +93,21 @@ LairDnD.Views.ListingShow = Backbone.CompositeView.extend({
   render: function(){
     this.renderModal();
     this.renderSeeMores();
-    this.renderReviews();
     return this;
   },
 
   renderReviews: function() {
+    var revs = new LairDnD.Collections.Reviews();
+    var subview = new LairDnD.Views.ReviewIndex({
+      collection: revs,
+      listing_id: this.model.id
+    });
+    revs.fetch({
+      data: {
+        listing_id: this.model.id
+      }
+    });
+    this.addSubview('#listing-reviews', subview);
   },
 
   renderSeeMores: function(){

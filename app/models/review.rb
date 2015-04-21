@@ -12,10 +12,11 @@
 #
 
 class Review < ActiveRecord::Base
-  validates_presence_of :reviewable, :user, :comment, :rating
-  validate :stayed_at_before
+  validates_presence_of :listing, :user, :comment, :rating
+  #validate :stayed_at_before
   belongs_to :listing
-  
+  belongs_to :user
+
 
   def stayed_at_before
     errors.add(:not_valid, 'you have not stayed at this listing before') unless self.user.stayed_at?(self.listing)

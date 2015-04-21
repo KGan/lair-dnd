@@ -1,0 +1,9 @@
+<div class='media-left profile-picture'>
+  <a href='javascript:void(0)'>
+    <img class='media-object profile-photo media-round' src='<%= review.get("user").profile_picture %>'>
+  </a>
+  <a href='/users/<%= review.get("user").id %>'><%= review.get('user').email %></a>
+</div>
+<div class='media-body'>
+  <%= review.escape('comment') %>
+</div>

@@ -18,7 +18,7 @@
 .booking-form {
   z-index: 4;
   .form-header {
-    width:315px;
+    min-width:315px;
     height:50px;
     background: #000;
     opacity: .6;
@@ -33,12 +33,12 @@
       width: .5em;
     }
   }
-  width: 315px;
+  min-width: 315px;
   padding: 0px;
   background: #fff;
   border: 1px solid #919191;
   margin-top: -52px;
-  
+
   form {
     margin: 20px;
   }
@@ -64,11 +64,9 @@
     display:flex;
     justify-content:center;
   }
-  
+
 }
 
 .affix {
   top:50px;
-    
 }
-

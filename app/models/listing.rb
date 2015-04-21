@@ -35,7 +35,7 @@ class Listing < ActiveRecord::Base
   has_one :location_mapping, dependent: :destroy
   has_one :location_alias, through: :location_mapping
   has_many :photos, dependent: :destroy
-  has_many :reviews, as: :reviewable
+  has_many :reviews
   acts_as_mappable through: {location_alias: :location}
   def is_owner?(u)
     !!(u.id == self.owner_id)

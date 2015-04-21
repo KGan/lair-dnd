@@ -1,7 +1,7 @@
 class Api::ReviewsController < Api::ApiController
   skip_before_action :require_login!, only: [:show, :index]
   def index
-    @reviews = search
+    @reviews = Review.where(listing_id: params[:listing_id])
     if @reviews
       render :index
     else
