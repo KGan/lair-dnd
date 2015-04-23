@@ -92,4 +92,7 @@ class User < ActiveRecord::Base
     self.bookings.where(listing_id: listing.id).exists?(['dtend < ?', Time.now])
   end
 
+  def functional_privileges?
+    self.user.guest || self.user.admin
+  end
 end

@@ -16,6 +16,6 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   belongs_to :listing
-  validates_presence_of :listing, :user, :photo_url, :thumb_url
+  validates_presence_of :user, :photo_url, :thumb_url
 end
 

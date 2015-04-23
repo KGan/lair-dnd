@@ -13,12 +13,14 @@
 
 class Review < ActiveRecord::Base
   validates_presence_of :listing, :user, :comment, :rating
-  #validate :stayed_at_before
+  validates_uniqueness_of :listing_id, scope: :user_id
+  validates :rating, inclusion: {in: (0..5).to_a}
+  validate :stayed_at_before
   belongs_to :listing
   belongs_to :user
 
 
   def stayed_at_before
-    errors.add(:not_valid, 'you have not stayed at this listing before') unless self.user.stayed_at?(self.listing)
+    errors.add(:not_valid, 'you have not stayed at this listing before') unless self.user.stayed_at?(self.listing) || self.user.functional_privileges? 
   end
 end

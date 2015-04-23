@@ -18,6 +18,7 @@
 //= require jquery.iframe-transport
 //= require jquery.cloudinary
 //= require bootstrap-sprockets
+//= require bootstrap-tour
 //= require underscore
 //= require backbone
 //= require lair_dn_d
