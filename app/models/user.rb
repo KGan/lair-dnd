@@ -93,6 +93,6 @@ class User < ActiveRecord::Base
   end
 
   def functional_privileges?
-    self.user.guest || self.user.admin
+    self.guest || self.admin
   end
 end

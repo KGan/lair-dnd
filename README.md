@@ -23,14 +23,14 @@ state of the art lairs and dungeons
  - [x] Photo and Photo Carousel
  - [x] Basic info
  - [x] details + amenities
-- [ ] Leave Comments on places
-- [ ] Ratings/Reviews
-- [ ] Search for places by
+- [x] Leave Comments on places
+- [x] Ratings/Reviews
+- [x] Search for places by
  - [x] location
  - [ ] price
  - [ ] review-restricted
  - [ ] accomodations
-- [ ] Reservation system / Booking conflict resolutions
+- [x] Reservation system / Booking conflict resolutions
 
 
 ## Design Docs

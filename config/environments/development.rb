@@ -42,4 +42,14 @@ Rails.application.configure do
   config.assets.precompile += %w( .svg .eot .woff .ttf )
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # bullet optimizer
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+  end
 end
